@@ -22,57 +22,83 @@ export function QuestionCard({ question, selectedOptionIds, onOptionChange, isPr
   };
 
   return (
-    <div className="bg-white p-6 border rounded shadow-sm">
-      <p className="text-lg mb-6">{question.text}</p>
+    <div className="glass-card p-8 rounded-3xl relative">
+      <div className="flex items-start gap-4 mb-8">
+        <div className="flex-shrink-0 w-10 h-10 bg-gradient-to-br from-orange-400 to-orange-600 rounded-full flex items-center justify-center text-white font-bold shadow-md">
+          Q
+        </div>
+        <h3 className="text-xl md:text-2xl font-semibold text-slate-800 leading-relaxed pt-1">
+          {question.text}
+        </h3>
+      </div>
       
-      <div className="space-y-3">
+      <div className="space-y-4">
         {question.options.map(opt => {
           const isSelected = selectedOptionIds.includes(opt.id);
           
-          let bgColor = 'bg-white hover:bg-gray-50';
-          let borderColor = 'border-gray-200';
-          let textColor = 'text-gray-900';
+          let bgColor = 'bg-white hover:bg-slate-50';
+          let borderColor = 'border-slate-200';
+          let textColor = 'text-slate-700';
+          let radioClass = 'custom-radio';
 
           if (isEvaluated) {
              if (opt.isCorrect) {
-               bgColor = 'bg-green-100';
-               borderColor = 'border-green-500';
-               textColor = 'text-green-900';
+               bgColor = 'bg-emerald-50';
+               borderColor = 'border-emerald-400 border-2';
+               textColor = 'text-emerald-900 font-medium';
+               radioClass = 'custom-radio border-emerald-500 text-emerald-500';
              } else if (isSelected && !opt.isCorrect) {
-               bgColor = 'bg-red-100';
-               borderColor = 'border-red-500';
-               textColor = 'text-red-900';
+               bgColor = 'bg-rose-50';
+               borderColor = 'border-rose-400 border-2';
+               textColor = 'text-rose-900 font-medium';
+               radioClass = 'custom-radio border-rose-500 text-rose-500';
              }
+          } else if (isSelected) {
+            bgColor = 'bg-orange-50';
+            borderColor = 'border-orange-400 border-2';
+            textColor = 'text-orange-900 font-medium';
           }
 
           return (
             <label 
               key={opt.id} 
               data-testid={`option-${opt.id}`}
-              className={`flex items-center space-x-3 p-3 border rounded cursor-pointer transition-colors ${bgColor} ${borderColor} ${textColor}`}
+              className={`flex items-start space-x-4 p-5 rounded-2xl cursor-pointer transition-all duration-200 shadow-sm border ${bgColor} ${borderColor} ${textColor}`}
             >
-              <input 
-                type="radio" 
-                name={`question-${question.id}`}
-                checked={isSelected}
-                onChange={() => onOptionChange(opt.id)}
-                disabled={isEvaluated}
-                className="w-5 h-5 text-blue-600"
-              />
-              <span>{opt.text}</span>
+              <div className="pt-0.5">
+                <input 
+                  type="radio" 
+                  name={`question-${question.id}`}
+                  checked={isSelected}
+                  onChange={() => onOptionChange(opt.id)}
+                  disabled={isEvaluated}
+                  className={radioClass}
+                />
+              </div>
+              <span className="text-lg leading-relaxed flex-1">{opt.text}</span>
+              
+              {/* Icons for evaluated state */}
+              {isEvaluated && opt.isCorrect && (
+                <svg className="w-6 h-6 text-emerald-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M5 13l4 4L19 7"></path></svg>
+              )}
+              {isEvaluated && isSelected && !opt.isCorrect && (
+                <svg className="w-6 h-6 text-rose-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="3" d="M6 18L18 6M6 6l12 12"></path></svg>
+              )}
             </label>
           );
         })}
       </div>
 
       {isPracticeMode && !isEvaluated && (
-        <button 
-          onClick={handleEvaluate}
-          disabled={selectedOptionIds.length === 0}
-          className="mt-6 px-4 py-2 bg-purple-600 text-white rounded font-medium disabled:opacity-50"
-        >
-          Check Answer
-        </button>
+        <div className="mt-8 flex justify-end border-t border-slate-200/60 pt-6">
+          <button 
+            onClick={handleEvaluate}
+            disabled={selectedOptionIds.length === 0}
+            className="px-8 py-3 bg-gradient-to-r from-indigo-500 to-purple-600 text-white rounded-xl font-bold shadow-md hover:shadow-lg transform hover:-translate-y-0.5 transition-all disabled:opacity-50 disabled:transform-none disabled:shadow-none"
+          >
+            Check Answer
+          </button>
+        </div>
       )}
 
       {isEvaluated && (

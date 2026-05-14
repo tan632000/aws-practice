@@ -31,7 +31,7 @@ describe('QuestionCard', () => {
 
     // Initial state (no evaluation colors yet)
     const opt2Label = screen.getByTestId('option-opt2');
-    expect(opt2Label.className).not.toContain('bg-red-100');
+    expect(opt2Label.className).not.toContain('bg-rose-50');
 
     // Click check answer
     const checkBtn = screen.getByText('Check Answer');
@@ -39,14 +39,14 @@ describe('QuestionCard', () => {
 
     // Correct option should be green, wrong selected should be red
     const opt1Label = screen.getByTestId('option-opt1');
-    expect(opt1Label.className).toContain('bg-green-100');
-    expect(opt2Label.className).toContain('bg-red-100');
+    expect(opt1Label.className).toContain('bg-emerald-50');
+    expect(opt2Label.className).toContain('bg-rose-50');
 
     // Explanation should appear
     expect(screen.getByText('This is the explanation')).toBeDefined();
     
     // Trick button should appear
-    const trickBtn = screen.getByText('Show Trick 💡');
+    const trickBtn = screen.getByText('Show Pro Tip');
     fireEvent.click(trickBtn);
     expect(screen.getByText('This is a trick')).toBeDefined();
   });
