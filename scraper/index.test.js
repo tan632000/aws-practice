@@ -28,11 +28,14 @@ describe('deduplicateQuestions', () => {
 
 describe('Integration Scraper Test', () => {
   it('should scrape successfully from a local html file', async () => {
+    // Set env var so we don't overwrite real data
+    const outputPath = path.join(__dirname, 'test-output.json');
+    process.env.SCRAPER_OUTPUT_PATH = outputPath;
+
     // Run the scraper which uses the mock.html configured in selectors.json
     await runScraper();
     
     // Verify output file
-    const outputPath = path.join(__dirname, '../public/data/questions.json');
     expect(fs.existsSync(outputPath)).toBe(true);
     
     const data = JSON.parse(fs.readFileSync(outputPath, 'utf8'));

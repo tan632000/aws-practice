@@ -4,18 +4,21 @@ import type { QuestionSchema, ExamSession, ExamResult } from '../../lib/types';
 export const EXAM_DURATION_SECONDS = 130 * 60; // 7800s
 export const EXAM_QUESTION_COUNT = 65;
 
-export async function loadQuestionsToDB(questionsJsonUrl = '/data/questions.json'): Promise<void> {
-  const count = await db.questions.count();
-  if (count === 0) {
-    try {
-      const response = await fetch(questionsJsonUrl);
-      if (response.ok) {
-        const questions: QuestionSchema[] = await response.json();
-        await db.questions.bulkAdd(questions);
-      }
-    } catch (error) {
-      console.error('Failed to load questions JSON:', error);
+export async function loadQuestionsToDB() {
+  try {
+    const res = await fetch('/data/questions.json');
+    if (!res.ok) throw new Error('Failed to fetch questions.json');
+    const data = await res.json();
+    
+    const count = await db.questions.count();
+    // If the database is empty or the number of questions has changed, reload
+    if (count === 0 || count !== data.length) {
+      await db.questions.clear();
+      await db.questions.bulkAdd(data);
+      console.log(`Loaded ${data.length} questions into DB.`);
     }
+  } catch (error) {
+    console.error('Error loading questions:', error);
   }
 }
 

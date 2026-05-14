@@ -8,7 +8,6 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const selectorsPath = path.join(__dirname, 'selectors.json');
-const outputPath = path.join(__dirname, '../public/data/questions.json');
 
 function generateHash(text) {
   return crypto.createHash('sha256').update(text).digest('hex');
@@ -31,6 +30,7 @@ export function deduplicateQuestions(questions) {
 }
 
 export async function runScraper() {
+  const outputPath = process.env.SCRAPER_OUTPUT_PATH || path.join(__dirname, '../public/data/questions.json');
   let selectors;
   try {
     const rawData = fs.readFileSync(selectorsPath, 'utf8');

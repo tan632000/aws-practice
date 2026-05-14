@@ -1,19 +1,197 @@
 [
   {
-    "text": "What is Amazon S3?",
+    "id": "q1-s3-classes",
+    "text": "A company wants to store backup data on AWS. The data is rarely accessed but must be retrieved within 12 hours when needed. Which Amazon S3 storage class is the most cost-effective for this requirement?",
     "options": [
-      {
-        "id": "opt-0",
-        "text": "Object Storage",
-        "isCorrect": true
-      },
-      {
-        "id": "opt-1",
-        "text": "Block Storage",
-        "isCorrect": false
-      }
+      { "id": "opt1", "text": "S3 Standard", "isCorrect": false },
+      { "id": "opt2", "text": "S3 Standard-IA (Infrequent Access)", "isCorrect": false },
+      { "id": "opt3", "text": "S3 Glacier Flexible Retrieval", "isCorrect": true },
+      { "id": "opt4", "text": "S3 Glacier Deep Archive", "isCorrect": false }
     ],
-    "explanation": "S3 is object storage.",
-    "id": "d876aee7a849e7bacd7abd8d9ab0887d997aa550190a54c0da16bf74e361d637"
+    "explanation": "S3 Glacier Flexible Retrieval provides retrieval times from a few minutes to 12 hours, making it highly cost-effective for data that is rarely accessed but needs recovery within a 12-hour window. Glacier Deep Archive has a retrieval time of 12-48 hours, which violates the 12-hour requirement.",
+    "trick": "Whenever you see 'rarely accessed' and 'retrieval within 12 hours', immediately think of Glacier Flexible Retrieval. Deep Archive is for 12+ hours.",
+    "domain": "Design Resilient Architectures"
+  },
+  {
+    "id": "q2-vpc-endpoint",
+    "text": "An application running on EC2 instances in a private subnet needs to securely access an Amazon DynamoDB table. The traffic must not traverse the public internet. Which solution meets this requirement?",
+    "options": [
+      { "id": "opt1", "text": "Set up a NAT Gateway in a public subnet.", "isCorrect": false },
+      { "id": "opt2", "text": "Create a Gateway VPC Endpoint for DynamoDB.", "isCorrect": true },
+      { "id": "opt3", "text": "Create an Interface VPC Endpoint (AWS PrivateLink) for DynamoDB.", "isCorrect": false },
+      { "id": "opt4", "text": "Attach an Internet Gateway and route table to the private subnet.", "isCorrect": false }
+    ],
+    "explanation": "A Gateway VPC Endpoint allows instances in a private subnet to access DynamoDB and S3 without traffic going over the public internet. It uses AWS internal networks and requires no NAT Gateway or Internet Gateway. Interface Endpoints are not the primary/cost-effective method for DynamoDB.",
+    "trick": "For S3 and DynamoDB, the answer is almost always 'Gateway Endpoint'. For almost all other AWS services, it's 'Interface Endpoint (PrivateLink)'.",
+    "domain": "Design Secure Applications and Architectures"
+  },
+  {
+    "id": "q3-rds-read-replica",
+    "text": "A popular e-commerce application uses Amazon RDS for MySQL. During flash sales, the database experiences heavy read traffic, causing latency. Which feature should a Solutions Architect implement to improve read performance?",
+    "options": [
+      { "id": "opt1", "text": "Enable Multi-AZ deployment for the RDS instance.", "isCorrect": false },
+      { "id": "opt2", "text": "Migrate the database to Amazon DynamoDB.", "isCorrect": false },
+      { "id": "opt3", "text": "Create RDS Read Replicas and route read queries to them.", "isCorrect": true },
+      { "id": "opt4", "text": "Increase the instance size of the RDS instance.", "isCorrect": false }
+    ],
+    "explanation": "RDS Read Replicas allow you to scale out beyond the capacity of a single DB instance for read-heavy database workloads. Multi-AZ is for high availability and disaster recovery, not for scaling read performance.",
+    "trick": "Heavy 'READ' traffic = Read Replicas. High availability/Disaster recovery = Multi-AZ.",
+    "domain": "Design High-Performing Architectures"
+  },
+  {
+    "id": "q4-sqs-fifo",
+    "text": "A financial application processes stock market transactions. The messages must be processed exactly once and strictly in the order they were received. Which AWS service is best suited for this?",
+    "options": [
+      { "id": "opt1", "text": "Amazon SQS Standard Queue", "isCorrect": false },
+      { "id": "opt2", "text": "Amazon SQS FIFO Queue", "isCorrect": true },
+      { "id": "opt3", "text": "Amazon SNS", "isCorrect": false },
+      { "id": "opt4", "text": "Amazon Kinesis Data Streams", "isCorrect": false }
+    ],
+    "explanation": "SQS FIFO (First-In-First-Out) queues guarantee that messages are processed exactly once, in the exact order that they are sent. Standard queues offer best-effort ordering and at-least-once delivery, meaning duplicates can occur.",
+    "trick": "Keywords 'exactly once' and 'strict order' always point to SQS FIFO.",
+    "domain": "Design Resilient Architectures"
+  },
+  {
+    "id": "q5-cloudfront-waf",
+    "text": "A media company hosts a static website on Amazon S3. The company wants to distribute the content globally with low latency while protecting the site from common web exploits and SQL injection. What combination of services should be used?",
+    "options": [
+      { "id": "opt1", "text": "Amazon CloudFront and AWS WAF", "isCorrect": true },
+      { "id": "opt2", "text": "AWS Global Accelerator and AWS Shield", "isCorrect": false },
+      { "id": "opt3", "text": "Application Load Balancer and AWS WAF", "isCorrect": false },
+      { "id": "opt4", "text": "Amazon API Gateway and AWS WAF", "isCorrect": false }
+    ],
+    "explanation": "Amazon CloudFront provides low-latency global content delivery (CDN). AWS WAF (Web Application Firewall) integrates directly with CloudFront to protect against SQL injections and cross-site scripting (XSS).",
+    "trick": "'Global distribution with low latency' = CloudFront. 'Protect from web exploits/SQLi' = AWS WAF. They pair perfectly together.",
+    "domain": "Design Secure Applications and Architectures"
+  },
+  {
+    "id": "q6-route53-failover",
+    "text": "A company operates an active-passive disaster recovery architecture across two AWS Regions. They need to automatically redirect user traffic from the primary region to the secondary region if the primary region goes down. Which Route 53 routing policy should be used?",
+    "options": [
+      { "id": "opt1", "text": "Latency routing policy", "isCorrect": false },
+      { "id": "opt2", "text": "Weighted routing policy", "isCorrect": false },
+      { "id": "opt3", "text": "Failover routing policy", "isCorrect": true },
+      { "id": "opt4", "text": "Geolocation routing policy", "isCorrect": false }
+    ],
+    "explanation": "Failover routing policy is used for active-passive failover configurations. Route 53 monitors the health of the primary endpoint and automatically routes traffic to the secondary endpoint if the primary becomes unhealthy.",
+    "trick": "Active-passive architecture always uses the 'Failover' routing policy. Active-active uses 'Weighted' or 'Latency'.",
+    "domain": "Design Resilient Architectures"
+  },
+  {
+    "id": "q7-efs-vs-ebs",
+    "text": "An application requires a shared file system that can be accessed concurrently by thousands of Amazon EC2 instances across multiple Availability Zones. Which storage service should be used?",
+    "options": [
+      { "id": "opt1", "text": "Amazon EBS Provisioned IOPS", "isCorrect": false },
+      { "id": "opt2", "text": "Amazon EFS", "isCorrect": true },
+      { "id": "opt3", "text": "Amazon S3", "isCorrect": false },
+      { "id": "opt4", "text": "Amazon EC2 Instance Store", "isCorrect": false }
+    ],
+    "explanation": "Amazon Elastic File System (EFS) provides a simple, scalable, fully managed elastic NFS file system that can be shared across multiple EC2 instances and Availability Zones. EBS is a block storage that can typically only be attached to a single instance.",
+    "trick": "When you see 'shared file system' and 'multiple EC2 instances/AZs', the answer is Amazon EFS.",
+    "domain": "Design High-Performing Architectures"
+  },
+  {
+    "id": "q8-macie",
+    "text": "A healthcare company stores sensitive patient records (PII/PHI) in an Amazon S3 bucket. They need an automated way to continuously discover and protect this sensitive data. Which AWS service is designed for this purpose?",
+    "options": [
+      { "id": "opt1", "text": "Amazon GuardDuty", "isCorrect": false },
+      { "id": "opt2", "text": "AWS Shield Advanced", "isCorrect": false },
+      { "id": "opt3", "text": "Amazon Macie", "isCorrect": true },
+      { "id": "opt4", "text": "AWS Config", "isCorrect": false }
+    ],
+    "explanation": "Amazon Macie is a fully managed data security and data privacy service that uses machine learning and pattern matching to discover and protect sensitive data (like PII) in Amazon S3.",
+    "trick": "If the question mentions 'Discovering sensitive data' or 'PII' in Amazon S3, the answer is always Amazon Macie.",
+    "domain": "Design Secure Applications and Architectures"
+  },
+  {
+    "id": "q9-asg-alb",
+    "text": "A web application runs on EC2 instances behind an Application Load Balancer (ALB). The instances are managed by an Auto Scaling group. How can you ensure the Auto Scaling group terminates instances that become unresponsive to HTTP requests?",
+    "options": [
+      { "id": "opt1", "text": "Enable ELB health checks on the Auto Scaling group.", "isCorrect": true },
+      { "id": "opt2", "text": "Use CloudWatch alarms to reboot the instances.", "isCorrect": false },
+      { "id": "opt3", "text": "Enable EC2 status checks on the Auto Scaling group.", "isCorrect": false },
+      { "id": "opt4", "text": "Write a Lambda function to terminate unhealthy instances.", "isCorrect": false }
+    ],
+    "explanation": "By default, an Auto Scaling group uses EC2 status checks. To ensure the ASG terminates instances that fail HTTP application-level health checks, you must configure the ASG to use ELB health checks.",
+    "trick": "For application-level failures (HTTP 500) in an ASG, you must enable 'ELB health checks'. EC2 health checks only detect hypervisor/hardware failures.",
+    "domain": "Design Resilient Architectures"
+  },
+  {
+    "id": "q10-aurora-serverless",
+    "text": "A startup is building a new web application with an unpredictable, highly variable database workload. The database may sit idle for days and then experience sudden traffic spikes. Which database solution minimizes costs during idle periods?",
+    "options": [
+      { "id": "opt1", "text": "Amazon RDS for PostgreSQL", "isCorrect": false },
+      { "id": "opt2", "text": "Amazon Redshift", "isCorrect": false },
+      { "id": "opt3", "text": "Amazon DynamoDB Provisioned capacity", "isCorrect": false },
+      { "id": "opt4", "text": "Amazon Aurora Serverless", "isCorrect": true }
+    ],
+    "explanation": "Amazon Aurora Serverless automatically starts up, shuts down, and scales capacity up or down based on your application's needs. It is perfect for unpredictable workloads and saves money because you pay only for database capacity consumed.",
+    "trick": "Keywords: 'Unpredictable workload', 'variable', 'sits idle for days'. Answer: Aurora Serverless.",
+    "domain": "Design Cost-Optimized Architectures"
+  },
+  {
+    "id": "q11-iam-roles",
+    "text": "An application running on an EC2 instance needs to upload log files to an Amazon S3 bucket. What is the most secure way to grant the application permissions to write to the S3 bucket?",
+    "options": [
+      { "id": "opt1", "text": "Create an IAM user, generate access keys, and embed them in the application code.", "isCorrect": false },
+      { "id": "opt2", "text": "Create an IAM role with S3 write permissions and attach it to the EC2 instance.", "isCorrect": true },
+      { "id": "opt3", "text": "Store AWS access keys in an S3 bucket and have the EC2 instance download them.", "is %Correct": false },
+      { "id": "opt4", "text": "Make the S3 bucket publicly writable.", "isCorrect": false }
+    ],
+    "explanation": "IAM roles are the most secure way to grant permissions to applications running on EC2 instances. It uses temporary security credentials instead of long-term access keys, eliminating the risk of hardcoding secrets.",
+    "trick": "Never hardcode access keys. If an EC2 instance needs access to any AWS service, always attach an IAM Role to the instance.",
+    "domain": "Design Secure Applications and Architectures"
+  },
+  {
+    "id": "q12-global-accelerator",
+    "text": "A multiplayer gaming company wants to route user traffic globally to the optimal AWS endpoint to minimize latency and packet loss. The application uses UDP protocols. Which service should be used?",
+    "options": [
+      { "id": "opt1", "text": "Amazon CloudFront", "isCorrect": false },
+      { "id": "opt2", "text": "Application Load Balancer", "isCorrect": false },
+      { "id": "opt3", "text": "AWS Global Accelerator", "isCorrect": true },
+      { "id": "opt4", "text": "Amazon Route 53", "isCorrect": false }
+    ],
+    "explanation": "AWS Global Accelerator improves availability and performance of applications using the AWS global network. Unlike CloudFront (which is for HTTP/HTTPS), Global Accelerator supports TCP and UDP protocols, making it perfect for gaming.",
+    "trick": "If the question mentions 'UDP protocols' or 'non-HTTP traffic' with 'global latency reduction', the answer is AWS Global Accelerator.",
+    "domain": "Design High-Performing Architectures"
+  },
+  {
+    "id": "q13-dax",
+    "text": "A gaming leaderboard application uses Amazon DynamoDB. The read traffic is extremely high, and the application requires microsecond read latency. Which solution should be implemented?",
+    "options": [
+      { "id": "opt1", "text": "Use Amazon ElastiCache for Redis in front of DynamoDB.", "isCorrect": false },
+      { "id": "opt2", "text": "Implement DynamoDB Accelerator (DAX).", "isCorrect": true },
+      { "id": "opt3", "text": "Enable DynamoDB Streams.", "isCorrect": false },
+      { "id": "opt4", "text": "Migrate the database to Amazon RDS.", "isCorrect": false }
+    ],
+    "explanation": "DynamoDB Accelerator (DAX) is a fully managed, highly available, in-memory cache for DynamoDB that delivers up to a 10x performance improvement, reducing response times from milliseconds to microseconds.",
+    "trick": "'Microsecond latency' + 'DynamoDB' = DAX. (Milliseconds = normal DynamoDB).",
+    "domain": "Design High-Performing Architectures"
+  },
+  {
+    "id": "q14-scp",
+    "text": "A large enterprise uses AWS Organizations to manage multiple AWS accounts. The security team wants to ensure that no developer can create an Amazon EC2 instance larger than t3.micro across ALL member accounts. How can this be enforced?",
+    "options": [
+      { "id": "opt1", "text": "Apply an IAM policy to all IAM users in the member accounts.", "isCorrect": false },
+      { "id": "opt2", "text": "Create a Service Control Policy (SCP) and attach it to the organization's root.", "isCorrect": true },
+      { "id": "opt3", "text": "Configure AWS CloudTrail to send alerts when large instances are launched.", "isCorrect": false },
+      { "id": "opt4", "text": "Use AWS WAF to block API calls that launch large instances.", "isCorrect": false }
+    ],
+    "explanation": "Service Control Policies (SCPs) are used in AWS Organizations to enforce permission boundaries across multiple member accounts. SCPs can deny specific API actions (like launching large instances) across the entire organization.",
+    "trick": "Enforcing rules 'across multiple accounts' or 'preventing root/admin users from doing something' is the primary use case for SCPs.",
+    "domain": "Design Secure Applications and Architectures"
+  },
+  {
+    "id": "q15-storage-gateway",
+    "text": "An on-premises data center is running out of storage capacity. The company wants to seamlessly extend their local storage to Amazon S3 without changing their existing application code, which relies on iSCSI block storage protocols. Which service should they use?",
+    "options": [
+      { "id": "opt1", "text": "AWS DataSync", "isCorrect": false },
+      { "id": "opt2", "text": "AWS Snowball Edge", "isCorrect": false },
+      { "id": "opt3", "text": "Amazon FSx", "isCorrect": false },
+      { "id": "opt4", "text": "AWS Storage Gateway (Volume Gateway)", "isCorrect": true }
+    ],
+    "explanation": "AWS Storage Gateway connects an on-premises software appliance with cloud-based storage. Volume Gateway provides cloud-backed storage volumes that on-premises applications can mount as iSCSI devices, meeting the exact requirements.",
+    "trick": "'On-premises', 'extend storage to S3', and 'iSCSI' = Volume Gateway. If it says 'SMB/NFS', it's File Gateway.",
+    "domain": "Design Resilient Architectures"
   }
 ]
