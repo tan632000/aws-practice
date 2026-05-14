@@ -1,0 +1,1259 @@
+{
+    "success": true,
+    "mode": "full",
+    "domain": null,
+    "mockId": 1,
+    "totalQuestions": 66,
+    "timeLimit": 7800,
+    "questions": [
+        {
+            "id": "saa-d3-q027",
+            "question": "A company is building a new application that will use a MySQL database. They need the database to be highly available, scalable, and managed with minimal administrative effort. Which TWO AWS database services meet these requirements? (Select TWO)",
+            "options": [
+                "Amazon RDS for MySQL",
+                "Amazon Aurora MySQL",
+                "MySQL installed on Amazon EC2",
+                "Amazon DynamoDB",
+                "Amazon Redshift"
+            ],
+            "correct": [
+                0,
+                1
+            ],
+            "type": "multi",
+            "explanation": "Both Amazon RDS for MySQL (A) and Amazon Aurora MySQL (B) are fully managed relational database services that provide high availability (via Multi-AZ or Aurora's storage layer) and scalability (read replicas, Aurora's scaling). They reduce administrative effort compared to self-managed MySQL on EC2 (C). DynamoDB (D) is a NoSQL database, not compatible with MySQL. Redshift (E) is a data warehouse, not an OLTP database.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.3: Determine high-performing database solutions",
+            "domain": "domain3",
+            "questionNumber": 1
+        },
+        {
+            "id": "saa-d3-q007",
+            "question": "A web application runs on Amazon EC2 and uses an Amazon RDS for PostgreSQL database. Users are reporting slow response times during peak hours. Database monitoring shows high CPU utilization and a high rate of read I/O. Which solution will MOST improve database performance without a major application rewrite?",
+            "options": [
+                "Increase the instance size of the RDS DB instance.",
+                "Create a read replica and direct read queries to it.",
+                "Migrate the database to Amazon DynamoDB.",
+                "Enable Multi-AZ deployment for the RDS DB instance."
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Creating a read replica offloads read traffic from the primary DB instance, reducing its CPU and read I/O load, which directly addresses the symptoms of high read I/O and CPU. Increasing the instance size (A) may help but is a vertical scaling approach that may not be as cost-effective or scalable as offloading reads. Migrating to DynamoDB (C) requires a major application rewrite, which the question seeks to avoid. Enabling Multi-AZ (D) provides high availability and failover support but does not improve performance for read-heavy workloads.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.3: Determine high-performing database solutions",
+            "domain": "domain3",
+            "questionNumber": 2
+        },
+        {
+            "id": "saa-d1-q029",
+            "question": "A company has an S3 bucket that stores sensitive data. They need to ensure that access to the bucket is logged for security audits. Which AWS service can provide detailed records of requests made to the S3 bucket?",
+            "options": [
+                "AWS CloudTrail",
+                "Amazon CloudWatch",
+                "AWS Config",
+                "S3 Server Access Logging"
+            ],
+            "correct": [
+                3
+            ],
+            "type": "single",
+            "explanation": "S3 Server Access Logging provides detailed records for requests made to an S3 bucket (object-level). AWS CloudTrail (A) logs API calls at the account level, which includes S3 actions, but S3 Server Access Logging is more focused on storage access. CloudWatch (B) is for metrics and logs. AWS Config (C) tracks configuration changes.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.3",
+            "domain": "domain1",
+            "questionNumber": 3
+        },
+        {
+            "id": "saa-d2-q006",
+            "question": "A company is designing a stateless web application that must scale automatically based on CPU utilization. Which AWS services should be used together to achieve this?",
+            "options": [
+                "Amazon EC2, Amazon S3, and AWS CloudFormation",
+                "Amazon EC2, Elastic Load Balancing, and Amazon CloudWatch",
+                "Amazon EC2, Elastic Load Balancing, and AWS Auto Scaling",
+                "Amazon EC2, Amazon Route 53, and AWS Lambda"
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "AWS Auto Scaling automatically adjusts the number of EC2 instances based on metrics like CPU utilization. Elastic Load Balancing distributes traffic across these instances, creating a scalable and resilient architecture. While CloudWatch (B) is used for monitoring and can trigger Auto Scaling, the core scalable pattern is EC2, ELB, and Auto Scaling. Options A and D do not include the automatic scaling component.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.1",
+            "domain": "domain2",
+            "questionNumber": 4
+        },
+        {
+            "id": "saa-d1-q054",
+            "question": "A VPC-hosted application needs to access S3 buckets without using the public internet. Which solution provides secure and private access?",
+            "options": [
+                "Configure a NAT gateway and use S3 public endpoints.",
+                "Create an S3 VPC endpoint and modify route tables.",
+                "Use a VPN connection to AWS Direct Connect.",
+                "Attach an internet gateway to the VPC and use bucket policies."
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "S3 VPC endpoints allow private connectivity between the VPC and S3 without traversing the internet, enhancing security. Option A uses NAT but still goes over the internet. Option C is for hybrid connectivity but may not be necessary for pure AWS access. Option D exposes traffic to the internet.",
+            "reference": "https://docs.aws.amazon.com/AmazonS3/latest/userguide/privatelink-interface-endpoints.html",
+            "domain": "domain1",
+            "questionNumber": 5
+        },
+        {
+            "id": "saa-d2-q003",
+            "question": "An e-commerce application experiences unpredictable traffic spikes. The current architecture uses an Auto Scaling group of EC2 instances behind an Application Load Balancer. During peak loads, the database becomes a bottleneck. What is the MOST scalable and cost-effective way to address this database read bottleneck?",
+            "options": [
+                "Increase the instance size of the database.",
+                "Implement Amazon ElastiCache in front of the database.",
+                "Create read replicas for the database.",
+                "Use Amazon DynamoDB instead of the current database."
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "Creating read replicas offloads read traffic from the primary database, providing a scalable solution for read-heavy workloads. Option A (vertical scaling) is less scalable and can be costly. Option B (ElastiCache) can improve performance but is best for specific query patterns and caching, not a general read scaling solution. Option D (migrating to DynamoDB) is a major architectural change and may not be suitable for all data models.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.1",
+            "domain": "domain2",
+            "questionNumber": 6
+        },
+        {
+            "id": "saa-d2-q020",
+            "question": "Which of the following are best practices for designing fault-tolerant systems on AWS? (Select TWO.)",
+            "options": [
+                "Assume everything will fail and design accordingly.",
+                "Use monolithic architecture to reduce complexity.",
+                "Use loosely coupled components.",
+                "Rely on a single, large instance for critical workloads.",
+                "Perform regular chaos engineering experiments."
+            ],
+            "correct": [
+                0,
+                2
+            ],
+            "type": "multi",
+            "explanation": "Designing for failure (A) and using loosely coupled components (C) are core principles of fault-tolerant design on AWS. Monolithic architectures (B) and single instances (D) create single points of failure. Chaos engineering (E) is a practice to test resilience but is not a design principle per se.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 7
+        },
+        {
+            "id": "saa-d4-q008",
+            "question": "An application requires shared file storage across multiple EC2 instances in the same Availability Zone. The workload has predictable performance needs and must minimize costs. Which storage solution is most cost-effective?",
+            "options": [
+                "Amazon EFS",
+                "Amazon FSx for Windows File Server",
+                "Amazon S3 with a file gateway",
+                "Amazon EBS volumes with shared attachments"
+            ],
+            "correct": [
+                3
+            ],
+            "type": "single",
+            "explanation": "Option D is correct because EBS volumes can be attached to multiple EC2 instances in the same Availability Zone using shared attachments, providing cost-effective shared storage for predictable workloads. Option A is incorrect as EFS is for shared storage across AZs and can be more expensive. Option B is incorrect because FSx is for Windows file systems and may not be needed for general shared storage. Option C is incorrect as S3 with file gateway is for hybrid storage, not low-latency shared access within an AZ.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 8
+        },
+        {
+            "id": "saa-d3-q040",
+            "question": "A company runs a Java application on Amazon EC2 that experiences long garbage collection pauses, affecting performance. The application requires a large heap size. Which EC2 instance family is MOST appropriate to minimize garbage collection impact?",
+            "options": [
+                "Compute optimized (C5)",
+                "Memory optimized (R5)",
+                "General purpose (M5)",
+                "Storage optimized (I3)"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Memory optimized instances (like R5) are designed for workloads that require large amounts of memory and offer high memory-to-CPU ratios. They are ideal for memory-intensive applications like Java with large heaps, and some variants include features that can help reduce garbage collection pauses (like larger memory bandwidth). Compute optimized (A) are for CPU-bound workloads. General purpose (C) provide a balance but may not have the optimal memory configuration. Storage optimized (D) are for high sequential I/O.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.2: Determine high-performing and scalable compute solutions",
+            "domain": "domain3",
+            "questionNumber": 9
+        },
+        {
+            "id": "saa-d1-q019",
+            "question": "A multi-account AWS environment uses AWS Organizations. The security team needs to prevent member accounts from disabling AWS CloudTrail logging. Which AWS service should be used to enforce this policy?",
+            "options": [
+                "IAM Policies",
+                "AWS Config",
+                "Service Control Policies (SCPs)",
+                "AWS Trusted Advisor"
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "Service Control Policies (SCPs) are a feature of AWS Organizations that set guardrails on the actions that member accounts can perform. An SCP can deny the ability to stop CloudTrail logging across all member accounts. IAM policies (A) control permissions within an account but cannot restrict the root user of a member account. AWS Config (B) monitors compliance but does not enforce policies. Trusted Advisor (D) gives recommendations.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.1",
+            "domain": "domain1",
+            "questionNumber": 10
+        },
+        {
+            "id": "saa-d3-q023",
+            "question": "A database administrator needs to improve the write performance of an Amazon RDS for MySQL database that uses General Purpose SSD (gp2) storage. The workload involves frequent small writes. Which change will MOST improve write I/O performance?",
+            "options": [
+                "Increase the size of the gp2 volume.",
+                "Migrate the database to use Provisioned IOPS SSD (io1) storage.",
+                "Enable read replicas.",
+                "Change the DB instance to a memory-optimized class."
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Provisioned IOPS SSD (io1) storage is designed for I/O-intensive workloads, especially small, random writes. It allows you to provision a specific number of IOPS independent of storage size, providing consistent low latency. Increasing the size of a gp2 volume (A) increases its baseline performance (3 IOPS per GB), but may not be sufficient and is less flexible than io1. Read replicas (C) improve read performance, not write. Changing the instance class (D) may improve CPU and memory, but the bottleneck for small writes is typically storage I/O.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.3: Determine high-performing database solutions",
+            "domain": "domain3",
+            "questionNumber": 11
+        },
+        {
+            "id": "saa-d4-q032",
+            "question": "An application uses an Application Load Balancer (ALB) to distribute traffic to EC2 instances across multiple Availability Zones. How can they optimize network costs without compromising availability?",
+            "options": [
+                "Use a Network Load Balancer (NLB) instead",
+                "Deploy ALB in a single Availability Zone",
+                "Use Amazon CloudFront in front of ALB",
+                "Reduce the number of target groups"
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "Option C is correct because CloudFront caches static content at edge locations, reducing the load on ALB and data transfer costs. Option A is incorrect as NLB is for TCP/UDP traffic and may not reduce costs for HTTP-based apps. Option B is incorrect because single-AZ deployment reduces high availability and doesn't significantly lower ALB costs. Option D is incorrect as reducing target groups doesn't affect ALB pricing based on usage.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 12
+        },
+        {
+            "id": "saa-d1-q036",
+            "question": "A company needs to securely store database credentials used by an application running on EC2 instances. Which two AWS services are suitable for this purpose? (Select TWO.)",
+            "options": [
+                "AWS KMS",
+                "AWS Secrets Manager",
+                "Amazon S3 with server-side encryption",
+                "AWS Systems Manager Parameter Store (Secure String)",
+                "Amazon RDS with Transparent Data Encryption"
+            ],
+            "correct": [
+                1,
+                3
+            ],
+            "type": "multi",
+            "explanation": "AWS Secrets Manager (B) is designed to store and rotate secrets like database credentials. AWS Systems Manager Parameter Store (D) supports Secure String parameters that are encrypted using KMS, suitable for storing secrets. AWS KMS (A) is for encryption keys, not secret storage. S3 (C) is not designed for secret management (though it can store encrypted files). RDS TDE (E) encrypts the database storage, not credential storage.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2",
+            "domain": "domain1",
+            "questionNumber": 13
+        },
+        {
+            "id": "saa-d1-q051",
+            "question": "A company wants to grant temporary access to an AWS S3 bucket for an external contractor. The access should be limited to specific operations and expire after 3 days. Which approach is MOST secure?",
+            "options": [
+                "Create an IAM user for the contractor and attach a policy with the necessary permissions.",
+                "Use IAM roles and assume role with temporary security credentials.",
+                "Share the access keys of an existing IAM user with the contractor.",
+                "Create a bucket policy that allows access from the contractor's IP address."
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "IAM roles with temporary security credentials are the most secure for granting temporary access because credentials expire automatically and do not require managing long-term access keys. Option A involves long-term credentials which are less secure for temporary needs. Option C is insecure as it shares permanent credentials. Option D is not user-specific and relies on IP which can be spoofed or change.",
+            "reference": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html",
+            "domain": "domain1",
+            "questionNumber": 14
+        },
+        {
+            "id": "saa-d2-q028",
+            "question": "A company's application runs on an EC2 instance and uses an Amazon RDS database instance in the same Availability Zone. To improve fault tolerance, what is the MINIMUM change required?",
+            "options": [
+                "Deploy the EC2 instance in an Auto Scaling group across multiple AZs.",
+                "Deploy the RDS database as a Multi-AZ deployment.",
+                "Deploy both the EC2 instance and RDS database in a second Availability Zone.",
+                "Use an Elastic Load Balancer in front of the EC2 instance."
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "The minimum change to improve fault tolerance for both compute and database is to deploy them in a second AZ, providing redundancy. Option A only addresses compute. Option B only addresses the database. Option D adds a load balancer but does not add redundancy for the single EC2 instance or the database.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 15
+        },
+        {
+            "id": "saa-d1-q049",
+            "question": "An IAM user should be able to launch only specific types of EC2 instances (e.g., t3.micro, t3.small) and only in a specific region. Which IAM policy element can enforce this?",
+            "options": [
+                "Use a Condition with ec2:InstanceType and aws:RequestedRegion.",
+                "Use a Resource that specifies the ARN of the allowed instance types.",
+                "Use an Action that allows only ec2:RunInstances for the specified instance types.",
+                "Use an Effect that denies ec2:RunInstances unless the instance type is allowed."
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "IAM policies support conditions to restrict actions based on various keys. The condition key ec2:InstanceType can restrict the instance type, and aws:RequestedRegion can restrict the region. The policy would allow ec2:RunInstances with these conditions. Option B is not valid because instance ARNs are not defined that way. Option C is incomplete without conditions. Option D describes a Deny effect, which can be used but is less common than an Allow with conditions.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.1",
+            "domain": "domain1",
+            "questionNumber": 16
+        },
+        {
+            "id": "saa-d2-q025",
+            "question": "A company wants to deploy a database that can scale read capacity elastically and automatically fail over to a replica in another Availability Zone. Which AWS database service meets these requirements?",
+            "options": [
+                "Amazon RDS for MySQL with Multi-AZ",
+                "Amazon Aurora with replicas",
+                "Amazon DynamoDB with global tables",
+                "Amazon Redshift"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Amazon Aurora provides automatic failover to a replica in a different AZ and can scale read capacity by adding up to 15 read replicas. RDS Multi-AZ (A) provides failover but read replicas are separate. DynamoDB global tables (C) are for multi-Region replication. Redshift (D) is a data warehouse.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 17
+        },
+        {
+            "id": "saa-d1-q035",
+            "question": "A company wants to detect potentially unauthorized or malicious activity within their AWS account, such as unusual API calls or potentially compromised EC2 instances. Which AWS service provides intelligent threat detection?",
+            "options": [
+                "Amazon Inspector",
+                "AWS Config",
+                "Amazon GuardDuty",
+                "AWS Security Hub"
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "Amazon GuardDuty is a threat detection service that continuously monitors for malicious or unauthorized behavior using machine learning and threat intelligence feeds. Amazon Inspector (A) assesses EC2 instances for vulnerabilities. AWS Config (B) assesses resource configurations. AWS Security Hub (D) aggregates security findings from multiple services including GuardDuty.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2",
+            "domain": "domain1",
+            "questionNumber": 18
+        },
+        {
+            "id": "saa-d1-q027",
+            "question": "A company is designing a secure architecture for a web application. They need to protect against SQL injection attacks and ensure that the application can handle a sudden surge in traffic without becoming unavailable. Which two AWS services should they use? (Select TWO.)",
+            "options": [
+                "AWS Shield",
+                "AWS WAF",
+                "Amazon CloudFront",
+                "Amazon RDS with Multi-AZ",
+                "Elastic Load Balancing with Auto Scaling"
+            ],
+            "correct": [
+                1,
+                4
+            ],
+            "type": "multi",
+            "explanation": "AWS WAF (B) protects against SQL injection (among other web exploits). Elastic Load Balancing combined with Auto Scaling (E) ensures the application can scale to handle traffic surges, maintaining availability. AWS Shield (A) is for DDoS protection. CloudFront (C) is a CDN that can improve performance and security but is not specifically for SQL injection or scaling backend capacity. RDS Multi-AZ (D) is for database high availability.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2",
+            "domain": "domain1",
+            "questionNumber": 19
+        },
+        {
+            "id": "saa-d4-q003",
+            "question": "A company has a legacy on-premises application that requires low-latency access to frequently used data, while infrequently used data can be archived. They want to migrate to AWS with a hybrid storage solution that minimizes costs. Which AWS services should they use? (Select TWO)",
+            "options": [
+                "Amazon S3 Glacier for all data storage",
+                "AWS Storage Gateway with file gateway mode",
+                "Amazon EFS for shared file storage",
+                "AWS Storage Gateway with tape gateway mode",
+                "Amazon S3 for infrequently accessed data",
+                "Amazon EC2 instance store for caching"
+            ],
+            "correct": [
+                1,
+                4
+            ],
+            "type": "multi",
+            "explanation": "Options B and E are correct. Storage Gateway file gateway provides low-latency access to frequently used data on-premises while storing infrequently used data in S3 for cost savings. Option A is incorrect as Glacier is for archival, not for frequently accessed data. Option C is incorrect because EFS is for shared cloud storage, not hybrid. Option D is incorrect as tape gateway is for backup, not low-latency access. Option F is incorrect as instance store is ephemeral and not suitable for persistent hybrid storage.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 20
+        },
+        {
+            "id": "saa-d3-q024",
+            "question": "A company runs a mission-critical application on Amazon EC2 instances. They want to ensure the application can withstand the failure of an entire AWS Region. Which TWO strategies are part of a multi-region high-availability architecture? (Select TWO)",
+            "options": [
+                "Use Amazon Route 53 with failover routing policies.",
+                "Deploy instances in an Auto Scaling group across multiple Availability Zones.",
+                "Use AWS Backup to back up data to another region.",
+                "Use Amazon S3 Cross-Region Replication for static assets.",
+                "Use an Application Load Balancer within a single region."
+            ],
+            "correct": [
+                0,
+                2
+            ],
+            "type": "multi",
+            "explanation": "For multi-region disaster recovery, you need a DNS-based failover mechanism like Route 53 (A) to route traffic to a healthy region. You also need to replicate data to the other region; AWS Backup (C) can replicate backups cross-region. Auto Scaling across AZs (B) is for high availability within a region, not across regions. S3 Cross-Region Replication (D) replicates objects but is not sufficient for a full application failover. An Application Load Balancer (E) is regional.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.4: Determine high-performing and scalable network architectures",
+            "domain": "domain3",
+            "questionNumber": 21
+        },
+        {
+            "id": "saa-d3-q002",
+            "question": "A financial trading application running on Amazon EC2 requires sub-millisecond latency for read/write operations on a dataset that is 200 GB and must be persisted. The dataset grows by 1 GB per day. Which storage solution meets these performance requirements?",
+            "options": [
+                "Amazon Elastic Block Store (Amazon EBS) io2 Block Express volumes",
+                "Amazon EC2 instance store",
+                "Amazon ElastiCache for Redis",
+                "Amazon FSx for Lustre"
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "Amazon EBS io2 Block Express volumes are designed for latency-sensitive, high-performance workloads, providing sub-millisecond latency, high IOPS, and durable block storage that persists independently of the EC2 instance life cycle. Instance store (B) provides very low latency but data is lost if the instance stops or terminates, failing the persistence requirement. ElastiCache (C) is an in-memory data store offering microsecond latency but is not durable persistent storage for a primary dataset. FSx for Lustre (D) is a high-performance file system for compute-intensive workloads but is typically not the primary choice for sub-millisecond block-level I/O on a single EC2 instance.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.1: Determine high-performing and scalable storage solutions",
+            "domain": "domain3",
+            "questionNumber": 22
+        },
+        {
+            "id": "saa-d1-q004",
+            "question": "A Solutions Architect is designing a secure VPC for a three-tier web application. The architecture must prevent unintended access to the application servers in the private subnet. Which two actions are security best practices? (Select TWO.)",
+            "options": [
+                "Configure a security group for the application servers that allows inbound traffic on port 443 from the internet gateway.",
+                "Place the application servers in a private subnet with a route table that has no route to an internet gateway.",
+                "Use network ACLs on the private subnet to deny all inbound traffic from the public subnet.",
+                "Configure the security group for the application servers to allow inbound traffic only from the load balancer's security group.",
+                "Assign public IP addresses to the application servers for patching via the internet."
+            ],
+            "correct": [
+                1,
+                3
+            ],
+            "type": "multi",
+            "explanation": "Placing servers in a private subnet without an internet gateway route (B) is a foundational network security control, preventing direct internet access. Using security group rules that reference the load balancer's security group (D) ensures only the load balancer can communicate with the app servers, following the principle of least privilege. Option A would expose the app servers directly to the internet. Option C is overly restrictive; network ACLs should allow necessary traffic from the public subnet (e.g., from the load balancer). Option E violates the principle of keeping app servers private.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2",
+            "domain": "domain1",
+            "questionNumber": 23
+        },
+        {
+            "id": "saa-d2-q033",
+            "question": "A company runs a mission-critical application on AWS. They require the application to have an uptime of 99.99% over a year. Which architectural approach is MOST appropriate?",
+            "options": [
+                "Deploy the application in a single Availability Zone with backups.",
+                "Deploy the application across multiple Availability Zones.",
+                "Deploy the application across multiple AWS Regions.",
+                "Deploy the application on-premises and in AWS."
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Deploying across multiple Availability Zones within a Region provides high availability and can achieve 99.99% uptime. Single AZ (A) does not provide sufficient resilience. Multi-Region (C) provides higher availability but is more complex and costly. Hybrid (D) introduces complexity and may not meet the uptime requirement without proper design.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 24
+        },
+        {
+            "id": "saa-d1-q021",
+            "question": "Which of the following are security responsibilities of AWS under the AWS shared responsibility model? (Select TWO.)",
+            "options": [
+                "Securing the hypervisor and physical infrastructure.",
+                "Patching the guest operating system on EC2 instances.",
+                "Configuring security groups for EC2 instances.",
+                "Protecting the global network infrastructure.",
+                "Managing IAM user access policies."
+            ],
+            "correct": [
+                0,
+                3
+            ],
+            "type": "multi",
+            "explanation": "AWS is responsible for security 'of' the cloud, including the physical infrastructure, hypervisor, network, and global infrastructure. The customer is responsible for security 'in' the cloud, such as patching the guest OS (B), configuring security groups (C), and managing IAM policies (E).",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2",
+            "domain": "domain1",
+            "questionNumber": 25
+        },
+        {
+            "id": "saa-d4-q016",
+            "question": "An application experiences periodic spikes in traffic every Friday. The rest of the week, traffic is low. Which Auto Scaling policy helps minimize EC2 costs while handling spikes?",
+            "options": [
+                "Scheduled scaling based on predicted traffic patterns",
+                "Dynamic scaling using step scaling policies",
+                "Manual scaling when spikes occur",
+                "Use only On-Demand Instances with no scaling"
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "Option A is correct because scheduled scaling proactively adds instances before known spikes (like Fridays) and removes them afterward, optimizing costs. Option B is incorrect as dynamic scaling reacts to metrics, which may delay response and increase costs during spikes. Option C is inefficient and may not scale quickly enough. Option D is incorrect as it leads to over-provisioning and high costs during low traffic.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 26
+        },
+        {
+            "id": "saa-d3-q032",
+            "question": "An online transaction processing (OLTP) application requires a database with high I/O performance, consistency, and the ability to scale reads. Which Amazon RDS database engine is optimized for this workload?",
+            "options": [
+                "Amazon RDS for PostgreSQL",
+                "Amazon Aurora",
+                "Amazon RDS for Oracle",
+                "Amazon RDS for SQL Server"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Amazon Aurora is a MySQL and PostgreSQL-compatible relational database built for the cloud, providing up to five times the performance of standard MySQL and three times the performance of standard PostgreSQL. It is designed for high I/O, scalability, and availability, making it well-suited for OLTP workloads. While other RDS engines (A, C, D) can handle OLTP, Aurora is specifically optimized for performance and scalability on AWS.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.3: Determine high-performing database solutions",
+            "domain": "domain3",
+            "questionNumber": 27
+        },
+        {
+            "id": "saa-d1-q022",
+            "question": "A company uses Amazon S3 to store log files. A compliance rule requires that log files be retained for seven years and cannot be deleted or modified during that period. Which S3 feature should be used?",
+            "options": [
+                "S3 Lifecycle policies",
+                "S3 Versioning",
+                "S3 Object Lock",
+                "S3 Cross-Region Replication"
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "S3 Object Lock allows you to store objects using a write-once-read-many (WORM) model, preventing objects from being deleted or overwritten for a fixed amount of time (retention period) or indefinitely. This meets the compliance requirement for immutable storage. Lifecycle policies (A) automate transitioning or expiring objects. Versioning (B) keeps multiple versions but does not prevent deletion. Cross-region replication (D) copies objects but does not enforce immutability.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.3",
+            "domain": "domain1",
+            "questionNumber": 28
+        },
+        {
+            "id": "saa-d2-q016",
+            "question": "A company uses Amazon S3 to store critical data. To ensure data durability and availability in the event of an Availability Zone failure, which S3 feature should be used?",
+            "options": [
+                "S3 Intelligent-Tiering",
+                "S3 Cross-Region Replication",
+                "S3 Versioning",
+                "S3 Standard storage class"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "S3 Cross-Region Replication automatically replicates objects to a bucket in another AWS Region, protecting against Regional disasters. S3 Standard (D) already stores data across multiple AZs within a Region, providing high availability within that Region, but Cross-Region Replication adds protection against a Regional event. Intelligent-Tiering (A) is for cost optimization. Versioning (C) protects against accidental deletion.",
+            "reference": "https://docs.aws.amazon.com/AmazonS3/latest/dev/crr.html",
+            "domain": "domain2",
+            "questionNumber": 29
+        },
+        {
+            "id": "saa-d4-q022",
+            "question": "A database workload requires high memory and consistent CPU performance. The company wants to reduce costs compared to On-Demand Instances. Which RDS purchasing option is most cost-effective for a 1-year commitment?",
+            "options": [
+                "Standard Reserved Instances",
+                "Convertible Reserved Instances",
+                "On-Demand Instances",
+                "RDS Proxy"
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "Option A is correct because Standard Reserved Instances offer the highest discount for a specific instance type and region for a 1-year term, ideal for stable workloads. Option B is incorrect as Convertible Reserved Instances offer lower discounts but allow instance type changes, which may not be needed. Option C is incorrect as On-Demand is more expensive for long-term use. Option D is incorrect because RDS Proxy is for connection pooling, not cost optimization.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 30
+        },
+        {
+            "id": "saa-d4-q028",
+            "question": "An application uses Amazon DynamoDB with provisioned capacity. Traffic patterns are predictable with higher reads during the day and lower at night. How can they optimize costs?",
+            "options": [
+                "Use DynamoDB auto-scaling",
+                "Switch to on-demand capacity",
+                "Manually adjust provisioned capacity twice daily",
+                "Use DynamoDB Streams for data processing"
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "Option A is correct because DynamoDB auto-scaling automatically adjusts provisioned capacity based on load, ensuring cost efficiency for predictable patterns. Option B is incorrect as on-demand may be more expensive for predictable traffic. Option C is inefficient and error-prone. Option D is incorrect because DynamoDB Streams is for real-time data processing, not cost optimization.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 31
+        },
+        {
+            "id": "saa-d2-q010",
+            "question": "A company wants to build a serverless order processing system where orders are placed via an API, processed asynchronously, and then a confirmation email is sent. Which combination of AWS services provides a scalable, loosely coupled solution?",
+            "options": [
+                "Amazon API Gateway, AWS Lambda, Amazon SQS, and Amazon SES",
+                "Amazon EC2, Amazon SQS, Amazon SNS, and Amazon SES",
+                "Amazon API Gateway, AWS Lambda, Amazon RDS, and Amazon SES",
+                "Amazon S3, AWS Lambda, Amazon SQS, and Amazon SES"
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "API Gateway receives the API call, Lambda processes the order, SQS queues the order for async processing (ensuring decoupling and scalability), and SES sends the email. Option B uses EC2, which is not serverless. Option C uses RDS (a database) but lacks a queue for asynchronous decoupling. Option D starts with S3, which is for object storage, not an API endpoint.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.1",
+            "domain": "domain2",
+            "questionNumber": 32
+        },
+        {
+            "id": "saa-d2-q002",
+            "question": "A microservices-based application uses Amazon EC2 instances. To ensure the application is loosely coupled and scalable, which TWO of the following AWS services should be used to decouple the components? (Select TWO.)",
+            "options": [
+                "Amazon API Gateway",
+                "Amazon SQS",
+                "Amazon RDS",
+                "Amazon S3",
+                "Amazon SNS"
+            ],
+            "correct": [
+                1,
+                4
+            ],
+            "type": "multi",
+            "explanation": "Amazon Simple Queue Service (SQS) and Amazon Simple Notification Service (SNS) are core services for building decoupled, scalable architectures. SQS provides a message queue for asynchronous communication, and SNS provides a pub/sub messaging model. While API Gateway (A) is for creating APIs, it is an entry point rather than a primary decoupling mechanism between backend microservices. RDS (C) is a relational database, and S3 (D) is object storage; neither is primarily a decoupling service.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.1",
+            "domain": "domain2",
+            "questionNumber": 33
+        },
+        {
+            "id": "saa-d3-q026",
+            "question": "A company stores archived financial records in Amazon S3. Compliance requires that the records be immutable for 7 years. Which S3 feature should be used to prevent deletion or modification?",
+            "options": [
+                "S3 Versioning",
+                "S3 Object Lock",
+                "S3 Lifecycle policies",
+                "S3 Cross-Region Replication"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "S3 Object Lock allows you to store objects using a write-once-read-many (WORM) model, preventing them from being deleted or modified for a fixed amount of time or indefinitely. This meets compliance requirements for immutability. S3 Versioning (A) keeps multiple versions of an object but does not prevent deletion of versions. Lifecycle policies (C) automate transitioning objects to different storage classes. Cross-Region Replication (D) copies objects to another region but does not enforce immutability.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.1: Determine high-performing and scalable storage solutions",
+            "domain": "domain3",
+            "questionNumber": 34
+        },
+        {
+            "id": "saa-d1-q028",
+            "question": "A Lambda function processes credit card transactions and must store encrypted data in DynamoDB. The encryption key must be automatically rotated every 90 days. Which solution meets this requirement with minimal operational overhead?",
+            "options": [
+                "Use DynamoDB encryption at rest with AWS owned keys.",
+                "Use DynamoDB encryption at rest with AWS KMS managed keys.",
+                "Use client-side encryption with a customer-managed KMS key and enable automatic key rotation.",
+                "Use client-side encryption with a key stored in AWS Secrets Manager and rotate the secret manually."
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "Client-side encryption with a customer-managed KMS key allows for automatic key rotation every 365 days (default) or custom period (1 day minimum). This provides control and automatic rotation. DynamoDB encryption at rest with AWS owned keys (A) or AWS managed keys (B) does not allow customer-controlled key rotation. Option D involves manual rotation and extra complexity.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.3",
+            "domain": "domain1",
+            "questionNumber": 35
+        },
+        {
+            "id": "saa-d3-q045",
+            "question": "A company uses Amazon S3 to store logs. They want to optimize costs by moving older logs to a lower-cost storage class while keeping them accessible. Which TWO S3 features can be used together to automate this? (Select TWO)",
+            "options": [
+                "S3 Lifecycle policies",
+                "S3 Intelligent-Tiering",
+                "S3 Cross-Region Replication",
+                "S3 Object Lock",
+                "S3 Versioning"
+            ],
+            "correct": [
+                0,
+                1
+            ],
+            "type": "multi",
+            "explanation": "S3 Lifecycle policies (A) automate transitioning objects to different storage classes based on age. S3 Intelligent-Tiering (B) automatically moves objects between access tiers based on changing access patterns, optimizing costs without management overhead. Cross-Region Replication (C) copies objects to another region. Object Lock (D) prevents deletion. Versioning (E) keeps multiple versions.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.1: Determine high-performing and scalable storage solutions",
+            "domain": "domain3",
+            "questionNumber": 36
+        },
+        {
+            "id": "saa-d2-q041",
+            "question": "Which of the following are benefits of using Amazon CloudFront? (Select TWO.)",
+            "options": [
+                "Improves availability by caching content at edge locations.",
+                "Provides a relational database service.",
+                "Reduces latency for end users.",
+                "Automatically scales EC2 instances.",
+                "Provides DDoS protection with AWS Shield Standard."
+            ],
+            "correct": [
+                0,
+                2
+            ],
+            "type": "multi",
+            "explanation": "CloudFront improves availability and reduces latency by caching content at edge locations worldwide. It also integrates with AWS Shield Standard for DDoS protection, but that is not a primary benefit listed in the options. It does not provide a database (B) or scale EC2 instances (D).",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 37
+        },
+        {
+            "id": "saa-d4-q020",
+            "question": "An application uses Amazon ECS with EC2 launch type. The workload has predictable traffic during business hours and low traffic at night. How can they reduce compute costs?",
+            "options": [
+                "Use Fargate launch type instead of EC2",
+                "Implement Auto Scaling for ECS tasks based on time",
+                "Use Spot Instances for the ECS cluster",
+                "Purchase Reserved Instances for the ECS cluster"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Option B is correct because scaling ECS tasks based on time (e.g., reducing tasks at night) aligns compute usage with demand, reducing costs. Option A is incorrect as Fargate may not be cost-effective for predictable workloads compared to EC2 with scaling. Option C is incorrect because Spot Instances can be interrupted, affecting ECS service reliability. Option D is incorrect as Reserved Instances lock in capacity but don't dynamically scale with traffic patterns.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 38
+        },
+        {
+            "id": "saa-d4-q018",
+            "question": "Which strategies help reduce compute costs for an EC2-based web application? (Select THREE)",
+            "options": [
+                "Use Auto Scaling to match demand",
+                "Purchase Reserved Instances for baseline capacity",
+                "Store data in S3 instead of EBS",
+                "Use Spot Instances for stateless components",
+                "Enable EC2 hibernation for stopped instances",
+                "Use larger instance types to consolidate workloads"
+            ],
+            "correct": [
+                0,
+                1,
+                3
+            ],
+            "type": "multi",
+            "explanation": "Options A, B, and D are correct. Auto Scaling adjusts capacity to demand, Reserved Instances discount baseline usage, and Spot Instances reduce costs for fault-tolerant workloads. Option C is incorrect as storing data in S3 vs EBS relates to storage, not compute costs. Option E is incorrect because EC2 hibernation saves costs for stopped instances but doesn't optimize running instances. Option F is incorrect as larger instances may lead to over-provisioning and higher costs if not fully utilized.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 39
+        },
+        {
+            "id": "saa-d3-q021",
+            "question": "A company's e-commerce database experiences slow query performance on complex joins and aggregations. The database is Amazon RDS for PostgreSQL. Which TWO solutions can improve query performance? (Select TWO)",
+            "options": [
+                "Create read replicas to distribute the load.",
+                "Add additional indexes based on query patterns.",
+                "Migrate to Amazon Aurora PostgreSQL for better performance.",
+                "Use Amazon ElastiCache for Redis to cache database queries.",
+                "Enable Multi-AZ deployment for higher availability."
+            ],
+            "correct": [
+                1,
+                3
+            ],
+            "type": "multi",
+            "explanation": "Adding indexes (B) can significantly speed up query performance by reducing the amount of data scanned. Using ElastiCache for Redis (D) as a caching layer can cache the results of frequent complex queries, reducing load on the database. Read replicas (A) help with read scaling but do not improve the performance of individual complex queries on the primary. Migrating to Aurora (C) may improve performance but is a major migration, not a quick optimization. Enabling Multi-AZ (E) is for availability, not performance.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.3: Determine high-performing database solutions",
+            "domain": "domain3",
+            "questionNumber": 40
+        },
+        {
+            "id": "saa-d2-q048",
+            "question": "A company's application uses an Amazon Aurora database. They want to ensure that the database can be quickly restored to a specific point in time within the last 35 days. Which feature should they use?",
+            "options": [
+                "Database snapshots",
+                "Automated backups with point-in-time recovery",
+                "Read replicas",
+                "Multi-AZ deployment"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Automated backups with point-in-time recovery allow restoration to any second during the backup retention period (up to 35 days). Database snapshots (A) are manual and represent a single point in time. Read replicas (C) are for read scaling. Multi-AZ (D) is for high availability.",
+            "reference": "https://docs.aws.amazon.com/AmazonRDS/latest/AuroraUserGuide/USER_PIT.html",
+            "domain": "domain2",
+            "questionNumber": 41
+        },
+        {
+            "id": "saa-d3-q013",
+            "question": "An application hosted in a single VPC needs private, high-throughput connectivity to Amazon S3 for frequent data transfers. The solution must not traverse the public internet. Which network feature should be used?",
+            "options": [
+                "A VPC endpoint for S3 (Gateway type)",
+                "A NAT gateway",
+                "An internet gateway",
+                "A VPC peering connection"
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "A VPC endpoint for S3 (Gateway type) allows instances in a VPC to privately connect to S3 without requiring an internet gateway, NAT device, or VPN connection. It provides high bandwidth and is highly available. A NAT gateway (B) allows private instances to access the internet but traffic to S3 would still go over the public internet. An internet gateway (C) provides public internet access. VPC peering (D) connects two VPCs, not a VPC to an AWS service like S3.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.4: Determine high-performing and scalable network architectures",
+            "domain": "domain3",
+            "questionNumber": 42
+        },
+        {
+            "id": "saa-d3-q011",
+            "question": "A monolithic application is being refactored into microservices. Each service has different resource requirements and traffic patterns. Which compute strategy allows each service to scale independently and optimize resource utilization?",
+            "options": [
+                "Run all services on a cluster of large Amazon EC2 instances.",
+                "Use AWS Lambda for all services.",
+                "Use Amazon EC2 Auto Scaling groups with different instance types for each service.",
+                "Use Amazon ECS or Amazon EKS with separate task definitions or deployments for each service."
+            ],
+            "correct": [
+                3
+            ],
+            "type": "single",
+            "explanation": "Amazon ECS or Amazon EKS (Kubernetes on AWS) allows you to define each microservice as a separate task or pod. These orchestration services enable independent scaling and resource allocation per service, optimizing utilization. Running all on a cluster of large EC2 instances (A) does not allow independent scaling and leads to resource contention. Using Lambda for all (B) may not be suitable for long-running or stateful services and couples the architecture heavily to event-driven patterns. Using separate Auto Scaling groups (C) is possible but more operationally complex and less efficient than a container orchestration platform designed for microservices.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.2: Determine high-performing and scalable compute solutions",
+            "domain": "domain3",
+            "questionNumber": 43
+        },
+        {
+            "id": "saa-d1-q048",
+            "question": "A company is deploying a web application on Amazon EC2 instances. They need to protect the application from DDoS attacks at both the network layer and the application layer. Which two AWS services should they use? (Select TWO.)",
+            "options": [
+                "AWS Shield Standard",
+                "AWS Shield Advanced",
+                "AWS WAF",
+                "Amazon GuardDuty",
+                "AWS Firewall Manager"
+            ],
+            "correct": [
+                1,
+                2
+            ],
+            "type": "multi",
+            "explanation": "AWS Shield Advanced (B) provides advanced DDoS protection for network/transport layers (L3/L4) and application layer (L7) for resources like EC2, ELB, CloudFront, and Route 53. AWS WAF (C) protects against common web exploits (L7) and can be used to mitigate application layer DDoS. Shield Standard (A) is automatically included but provides only basic protection. GuardDuty (D) is for threat detection. Firewall Manager (E) is for policy management.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2",
+            "domain": "domain1",
+            "questionNumber": 44
+        },
+        {
+            "id": "saa-d4-q024",
+            "question": "Which Amazon Aurora features help optimize database costs? (Select TWO)",
+            "options": [
+                "Aurora Serverless",
+                "Multi-AZ deployments",
+                "Read replicas",
+                "Encryption at rest",
+                "Backtrack",
+                "Global Database"
+            ],
+            "correct": [
+                0,
+                2
+            ],
+            "type": "multi",
+            "explanation": "Options A and C are correct. Aurora Serverless automatically scales capacity based on demand, reducing costs for variable workloads. Read replicas offload read traffic from the primary instance, allowing cost-effective scaling. Option B is incorrect as Multi-AZ increases availability but also costs. Option D is incorrect because encryption is for security, not cost optimization. Option E is incorrect as backtrack is for data recovery, not cost savings. Option F is incorrect as Global Database is for disaster recovery, which adds costs.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 45
+        },
+        {
+            "id": "saa-d3-q043",
+            "question": "A data analytics team runs weekly reports that scan a 100 TB dataset stored in Amazon S3. The reports are currently slow. Which service can accelerate the queries without moving the data?",
+            "options": [
+                "Amazon Athena",
+                "Amazon Redshift Spectrum",
+                "AWS Glue",
+                "Amazon EMR"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Amazon Redshift Spectrum allows you to run SQL queries directly against data in S3 using the Redshift cluster's processing power. It can scale out to thousands of nodes to accelerate queries on large datasets. Athena (A) is a serverless query service for S3 but may not provide the same performance as Redshift Spectrum for complex queries on very large datasets. Glue (C) is an ETL service. EMR (D) is a big data platform that can process data in S3 but requires more configuration.",
+            "reference": "https://docs.aws.amazon.com/redshift/latest/dg/c-using-spectrum.html",
+            "domain": "domain3",
+            "questionNumber": 46
+        },
+        {
+            "id": "saa-d1-q007",
+            "question": "A company uses AWS Organizations to manage multiple accounts. The security team needs to enforce a policy that prevents IAM users in any member account from having console access unless they use multi-factor authentication (MFA). Which two approaches can achieve this? (Select TWO.)",
+            "options": [
+                "Create an SCP in the organization's root that denies all actions unless an MFA-authenticated condition is present.",
+                "Create an IAM policy in each member account that denies console sign-in without MFA and attach it to all IAM users.",
+                "Use AWS IAM Identity Center (successor to AWS Single Sign-On) to require MFA for federated users.",
+                "Configure an IAM password policy in each member account that requires MFA.",
+                "Enable MFA for the root user of each member account."
+            ],
+            "correct": [
+                0,
+                2
+            ],
+            "type": "multi",
+            "explanation": "A Service Control Policy (SCP) at the organization level (A) can deny actions across all member accounts unless the MFA condition is met, providing centralized enforcement. Using IAM Identity Center (C) for centralized identity management allows enforcing MFA for federated access to AWS accounts. Option B is decentralized and difficult to manage at scale. Option D (password policy) does not enforce MFA for console sign-in. Option E only protects the root user, not IAM users.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.1",
+            "domain": "domain1",
+            "questionNumber": 47
+        },
+        {
+            "id": "saa-d1-q005",
+            "question": "A financial services company must protect their API-based application running on API Gateway and Lambda from Distributed Denial of Service (DDoS) attacks. Which AWS service should be used as a first line of defense?",
+            "options": [
+                "AWS Shield Advanced",
+                "Amazon GuardDuty",
+                "AWS Web Application Firewall (WAF)",
+                "AWS Firewall Manager"
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "AWS Shield Advanced provides advanced DDoS protection for applications running on AWS, including API Gateway and Lambda. It is designed to protect against sophisticated, large-scale attacks at the network and transport layers (L3/L4). AWS WAF (C) protects against common web exploits (L7) but is not the primary service for volumetric DDoS mitigation. GuardDuty (B) is a threat detection service, not a mitigation service. Firewall Manager (D) is a security management service for central policy management.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2",
+            "domain": "domain1",
+            "questionNumber": 48
+        },
+        {
+            "id": "saa-d2-q034",
+            "question": "A company uses AWS Lambda functions to process images uploaded to Amazon S3. To ensure that no image is processed twice and that all images are processed, which S3 event configuration should be used?",
+            "options": [
+                "Use S3 event notifications with an SQS queue as the destination.",
+                "Use S3 event notifications with an SNS topic as the destination.",
+                "Configure S3 to trigger Lambda directly.",
+                "Use S3 event notifications with Amazon EventBridge."
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "Using an SQS queue as a buffer between S3 and Lambda ensures message durability and allows for retries and error handling, preventing duplicate processing and loss. Direct Lambda triggers (C) may result in lost events if Lambda fails. SNS (B) and EventBridge (D) can be used but do not provide the same built-in queuing and retry mechanism as SQS.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.1",
+            "domain": "domain2",
+            "questionNumber": 49
+        },
+        {
+            "id": "saa-d4-q026",
+            "question": "A data warehouse workload uses Amazon Redshift for analytics. The workload is intensive during business hours but idle at night. How can they reduce Redshift costs?",
+            "options": [
+                "Use Redshift Spectrum to query data in S3",
+                "Pause the Redshift cluster during off-hours",
+                "Enable concurrency scaling",
+                "Use dense storage nodes instead of dense compute nodes"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Option B is correct because pausing the Redshift cluster when not in use stops billing for compute resources, significantly reducing costs for intermittent workloads. Option A is incorrect as Redshift Spectrum is for querying external data in S3, not for reducing cluster costs. Option C is incorrect because concurrency scaling adds costs for peak usage. Option D is incorrect as node type selection affects performance, not directly cost optimization for idle periods.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 50
+        },
+        {
+            "id": "saa-d1-q018",
+            "question": "A company wants to ensure that all data uploaded to their Amazon S3 buckets is automatically encrypted. Which two methods can achieve this at the bucket level? (Select TWO.)",
+            "options": [
+                "Use S3 client-side encryption with a KMS key before uploading.",
+                "Enable S3 default encryption using SSE-S3.",
+                "Use a bucket policy that denies any PutObject request without the x-amz-server-side-encryption header.",
+                "Enable S3 default encryption using SSE-KMS.",
+                "Use S3 Object Lock."
+            ],
+            "correct": [
+                1,
+                3
+            ],
+            "type": "multi",
+            "explanation": "S3 default encryption can be enabled on a bucket to automatically encrypt new objects using either SSE-S3 (B) or SSE-KMS (D). This is a bucket-level setting. Option A is client-side, not a bucket-level enforcement. Option C is a bucket policy that can enforce encryption headers but is more complex than using default encryption. Option E is for object retention, not encryption.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.3",
+            "domain": "domain1",
+            "questionNumber": 51
+        },
+        {
+            "id": "saa-d4-q029",
+            "question": "A VPC has multiple EC2 instances that frequently access Amazon S3. To reduce data transfer costs, what should be implemented?",
+            "options": [
+                "Use a NAT Gateway for all outbound traffic",
+                "Create VPC endpoints for S3",
+                "Use Internet Gateway with encryption",
+                "Place instances in public subnets"
+            ],
+            "correct": [
+                1
+            ],
+            "type": "single",
+            "explanation": "Option B is correct because VPC endpoints for S3 allow private connectivity between VPC and S3, avoiding data transfer costs over the internet. Option A is incorrect as NAT Gateway charges for data processing and doesn't reduce S3 transfer costs. Option C is incorrect because Internet Gateway routes traffic publicly, incurring data transfer fees. Option D is incorrect as public subnets use Internet Gateway, increasing costs.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 52
+        },
+        {
+            "id": "saa-d2-q032",
+            "question": "A company wants to improve the availability of their static website hosted on Amazon S3. Which of the following actions will help? (Select TWO.)",
+            "options": [
+                "Enable S3 versioning.",
+                "Use Amazon CloudFront in front of the S3 bucket.",
+                "Replicate the S3 bucket to another Region.",
+                "Enable S3 server access logging.",
+                "Use S3 Intelligent-Tiering."
+            ],
+            "correct": [
+                1,
+                2
+            ],
+            "type": "multi",
+            "explanation": "Using CloudFront (B) caches content at edge locations, improving availability and performance. Cross-Region replication (C) provides disaster recovery. Versioning (A) protects against accidental deletion. Server access logging (D) is for audit. Intelligent-Tiering (E) is for cost optimization.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 53
+        },
+        {
+            "id": "saa-d2-q007",
+            "question": "A two-tier web application runs on EC2 instances in a single Availability Zone with an in-memory session cache on each instance. If an instance fails, users lose their session data. How can you make the application more fault-tolerant without modifying the application code?",
+            "options": [
+                "Store session data in Amazon ElastiCache (Redis).",
+                "Use sticky sessions on the load balancer.",
+                "Store session data in instance store volumes.",
+                "Use an Auto Scaling group with a larger number of instances."
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "Moving session data to a shared, managed service like Amazon ElastiCache (Redis or Memcached) makes it external to the EC2 instances, preserving user sessions if an instance fails. Sticky sessions (B) tie a user to a specific instance, which exacerbates the problem upon instance failure. Instance store (C) is ephemeral. Auto Scaling (D) manages instance count but does not address data persistence.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 54
+        },
+        {
+            "id": "saa-d4-q039",
+            "question": "A VPC has resources that communicate frequently across Availability Zones. Which practices can reduce inter-AZ data transfer costs? (Select TWO)",
+            "options": [
+                "Place all resources in the same Availability Zone",
+                "Use VPC peering between AZs",
+                "Compress data before transfer",
+                "Use Elastic Load Balancing to distribute traffic",
+                "Enable VPC Flow Logs",
+                "Use private IP addresses for communication"
+            ],
+            "correct": [
+                0,
+                2
+            ],
+            "type": "multi",
+            "explanation": "Options A and C are correct. Placing resources in the same AZ eliminates inter-AZ data transfer fees, and compressing data reduces the volume of data transferred, lowering costs. Option B is incorrect as VPC peering is for connecting VPCs, not reducing AZ transfer costs. Option D is incorrect because load balancing distributes traffic but doesn't reduce data transfer costs. Option E is incorrect as Flow Logs are for monitoring. Option F is incorrect as private IPs are standard and don't affect costs.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 55
+        },
+        {
+            "id": "saa-d2-q039",
+            "question": "A company runs a web application on EC2 instances. They want to ensure that if an instance fails, traffic is automatically routed to healthy instances. Which service should they use?",
+            "options": [
+                "Amazon Route 53",
+                "AWS Auto Scaling",
+                "Elastic Load Balancer",
+                "Amazon CloudFront"
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "An Elastic Load Balancer (ELB) automatically distributes incoming traffic across multiple healthy EC2 instances and stops sending traffic to unhealthy instances. Route 53 (A) is DNS-based and can route at the domain level. Auto Scaling (B) replaces instances but does not route traffic. CloudFront (D) is a CDN.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 56
+        },
+        {
+            "id": "saa-d2-q031",
+            "question": "An application consists of multiple microservices. To ensure that a failure in one microservice does not cascade to others, which design pattern should be implemented?",
+            "options": [
+                "Bulkhead pattern",
+                "Saga pattern",
+                "Circuit breaker pattern",
+                "Ambassador pattern"
+            ],
+            "correct": [
+                0
+            ],
+            "type": "single",
+            "explanation": "The bulkhead pattern isolates elements of an application into pools so that if one fails, the others continue to function. The circuit breaker pattern (C) prevents repeated calls to a failing service. The Saga pattern (B) manages distributed transactions. The Ambassador pattern (D) is for offloading common client connectivity tasks.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.2",
+            "domain": "domain2",
+            "questionNumber": 57
+        },
+        {
+            "id": "saa-d1-q041",
+            "question": "A company uses AWS KMS to encrypt data in an Amazon S3 bucket. They need to ensure that if the KMS key is accidentally deleted, they can recover the key and decrypt the data. What should they do?",
+            "options": [
+                "Enable key rotation for the KMS key.",
+                "Enable automatic backups of the KMS key in AWS Backup.",
+                "Set a deletion window for the KMS key.",
+                "Disable key deletion in the key policy."
+            ],
+            "correct": [
+                3
+            ],
+            "type": "single",
+            "explanation": "To prevent accidental deletion, you can modify the key policy to deny the kms:ScheduleKeyDeletion and kms:DeleteKey actions. Key rotation (A) creates new key material but does not prevent deletion. AWS Backup (B) does not back up KMS keys. Deletion window (C) is not a KMS feature; KMS keys have a mandatory waiting period (7-30 days) before deletion, but disabling deletion in the policy is a stronger control.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.3",
+            "domain": "domain1",
+            "questionNumber": 58
+        },
+        {
+            "id": "saa-d3-q014",
+            "question": "A data lake stores petabytes of raw data that is analyzed weekly using Amazon EMR. The data is ingested once and rarely accessed, but when accessed, it must be available within minutes. Which Amazon S3 storage class provides the lowest storage cost while meeting the retrieval requirement?",
+            "options": [
+                "S3 Standard",
+                "S3 Standard-Infrequent Access",
+                "S3 Glacier Instant Retrieval",
+                "S3 Glacier Flexible Retrieval"
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "S3 Glacier Instant Retrieval is designed for long-lived data that is rarely accessed but requires retrieval in milliseconds when needed, at a lower storage cost than S3 Standard-IA. S3 Standard (A) is too expensive for rarely accessed data. S3 Standard-IA (B) has higher storage costs than Glacier Instant Retrieval and is optimized for infrequent access with rapid retrieval. S3 Glacier Flexible Retrieval (D) has retrieval times of minutes to hours, which does not meet the 'within minutes' requirement as reliably as Instant Retrieval.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.1: Determine high-performing and scalable storage solutions",
+            "domain": "domain3",
+            "questionNumber": 59
+        },
+        {
+            "id": "saa-d4-q030",
+            "question": "Which network architectures help minimize data transfer costs in AWS? (Select THREE)",
+            "options": [
+                "Using VPC endpoints for AWS services",
+                "Deploying resources in the same Availability Zone",
+                "Using Amazon CloudFront for content delivery",
+                "Enabling flow logs for VPC",
+                "Using AWS Direct Connect for hybrid connectivity",
+                "Configuring security groups to restrict traffic"
+            ],
+            "correct": [
+                0,
+                1,
+                2
+            ],
+            "type": "multi",
+            "explanation": "Options A, B, and C are correct. VPC endpoints avoid internet transfer costs, same-AZ deployment reduces inter-AZ data transfer fees, and CloudFront caches content at edges to reduce origin load and transfer costs. Option D is incorrect as flow logs are for monitoring, not cost optimization. Option E is incorrect because Direct Connect can reduce data transfer costs but involves upfront fees and may not always be cost-effective. Option F is incorrect as security groups control access but don't directly reduce data transfer costs.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 4: Design Cost-Optimized Architectures",
+            "domain": "domain4",
+            "questionNumber": 60
+        },
+        {
+            "id": "saa-d1-q039",
+            "question": "A company is concerned about data exfiltration from their AWS environment. Which two controls can help prevent unauthorized data transfers? (Select TWO.)",
+            "options": [
+                "Use VPC endpoints for AWS services to keep traffic within the AWS network.",
+                "Implement security groups that allow outbound traffic to any IP address.",
+                "Use SCPs to deny the ability to change VPC flow log configurations.",
+                "Use AWS Network Firewall to inspect outbound traffic and block traffic to known malicious IPs.",
+                "Enable Amazon GuardDuty to detect suspicious activity."
+            ],
+            "correct": [
+                0,
+                3
+            ],
+            "type": "multi",
+            "explanation": "VPC endpoints (A) allow private connectivity to AWS services, preventing data from going over the public internet. AWS Network Firewall (D) can inspect and filter outbound traffic, blocking exfiltration attempts. Security groups allowing all outbound traffic (B) increases risk. SCPs (C) prevent logging changes but don't stop exfiltration. GuardDuty (E) detects threats but does not prevent them by itself.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2 & Task 1.3",
+            "domain": "domain1",
+            "questionNumber": 61
+        },
+        {
+            "id": "saa-d1-q056",
+            "question": "A company has multiple AWS accounts and wants to allow users from the management account to assume roles in development accounts. What is the MOST secure method?",
+            "options": [
+                "Create IAM users in each account and share credentials.",
+                "Use AWS SSO to federate access across accounts.",
+                "Configure IAM roles with trust policies allowing the management account.",
+                "Use AWS Organizations to share resources directly."
+            ],
+            "correct": [
+                2
+            ],
+            "type": "single",
+            "explanation": "IAM roles with trust policies that specify the management account allow secure cross-account access without sharing credentials. Option A is insecure due to credential management. Option B is for federated access but may not be necessary for this scenario. Option D is for resource sharing, not role assumption.",
+            "reference": "https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_common-scenarios_aws-accounts.html",
+            "domain": "domain1",
+            "questionNumber": 62
+        },
+        {
+            "id": "saa-d3-q048",
+            "question": "A company runs a high-performance computing (HPC) workload on Amazon EC2 that requires low-latency, high-throughput communication between instances. Which TWO EC2 features should they use? (Select TWO)",
+            "options": [
+                "Cluster placement group",
+                "Enhanced networking",
+                "Spot Instances",
+                "Dedicated Instances",
+                "Amazon EC2 Auto Scaling"
+            ],
+            "correct": [
+                0,
+                1
+            ],
+            "type": "multi",
+            "explanation": "Cluster placement group (A) packs instances close together to minimize network latency and maximize throughput. Enhanced networking (B) uses single-root I/O virtualization (SR-IOV) to provide higher bandwidth and lower latency. Spot Instances (C) are for cost savings, not performance. Dedicated Instances (D) run on hardware dedicated to a single customer, which may not improve network performance. Auto Scaling (E) manages the number of instances, not network performance.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.2: Determine high-performing and scalable compute solutions",
+            "domain": "domain3",
+            "questionNumber": 63
+        },
+        {
+            "id": "saa-d3-q018",
+            "question": "A company hosts a three-tier web application in a VPC with public and private subnets. They need to ensure the application is resilient to the failure of a single Availability Zone. Which THREE resources must be distributed across multiple AZs? (Select THREE)",
+            "options": [
+                "NAT gateways",
+                "Internet gateway",
+                "Application load balancer",
+                "Amazon EC2 instances in an Auto Scaling group",
+                "Amazon RDS DB instance with Multi-AZ",
+                "Amazon S3 bucket"
+            ],
+            "correct": [
+                0,
+                2,
+                3
+            ],
+            "type": "multi",
+            "explanation": "To be resilient to an AZ failure, critical resources must be deployed across multiple AZs. NAT gateways (A) are zonal resources; one must be deployed in each AZ for private subnets to avoid a single point of failure. An Application Load Balancer (C) is deployed across multiple AZs to distribute traffic to targets in those AZs. EC2 instances in an Auto Scaling group (D) should be launched in multiple AZs. An internet gateway (B) is a regional resource, not zonal. An RDS DB instance with Multi-AZ (E) is already highly available across two AZs, but it is a single resource, not multiple that need distribution. Amazon S3 (F) is a regional service with built-in durability across AZs.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 3, Task 3.4: Determine high-performing and scalable network architectures",
+            "domain": "domain3",
+            "questionNumber": 64
+        },
+        {
+            "id": "saa-d1-q045",
+            "question": "A company wants to implement a defense-in-depth strategy for their VPC. Which three layers of security controls should they implement? (Select THREE.)",
+            "options": [
+                "Network Access Control Lists (NACLs) at the subnet level.",
+                "Security Groups at the instance level.",
+                "IAM policies for AWS resource access.",
+                "Encryption of data at rest using AWS KMS.",
+                "Web Application Firewall (WAF) for Layer 7 protection.",
+                "Amazon Route 53 for DNS management."
+            ],
+            "correct": [
+                0,
+                1,
+                4
+            ],
+            "type": "multi",
+            "explanation": "Defense-in-depth involves multiple layers of security controls. In a VPC, NACLs (A) provide stateless subnet-level filtering, Security Groups (B) provide stateful instance-level filtering, and WAF (E) provides application-level protection. IAM policies (C) are for access management, not network security. Encryption (D) is important but is a data protection control, not a network layer. Route 53 (F) is a DNS service, not a security control.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 1: Design Secure Architectures, Task 1.2",
+            "domain": "domain1",
+            "questionNumber": 65
+        },
+        {
+            "id": "saa-d2-q038",
+            "question": "Which of the following are design principles for scalability on AWS? (Select TWO.)",
+            "options": [
+                "Implement tight coupling between components.",
+                "Use horizontal scaling.",
+                "Use monolithic architecture.",
+                "Use managed services.",
+                "Use a single large instance."
+            ],
+            "correct": [
+                1,
+                3
+            ],
+            "type": "multi",
+            "explanation": "Horizontal scaling (adding more instances) and using managed services (which scale automatically) are key scalability principles. Tight coupling (A), monolithic architecture (C), and single large instances (vertical scaling) (E) limit scalability.",
+            "reference": "AWS SAA-C03 Exam Guide - Domain 2: Design Resilient Architectures, Task 2.1",
+            "domain": "domain2",
+            "questionNumber": 66
+        }
+    ]
+}

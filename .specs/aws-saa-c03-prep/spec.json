@@ -1,7 +1,7 @@
 {
   "feature_name": "aws-saa-c03-prep",
   "created_at": "2026-05-13T23:38:26+07:00",
-  "updated_at": "2026-05-13T23:59:00+07:00",
+  "updated_at": "2026-05-14T22:20:00+07:00",
   "language": "vi",
   "status": "in_progress",
   "phase": "tasks-generated",
@@ -51,6 +51,7 @@
     "tasks/task-R0-01-project-setup.md",
     "tasks/task-R1-01-crawler-job.md",
     "tasks/task-R2-01-mock-exam-engine.md",
+    "tasks/task-R2-02-mock-exam-selection.md",
     "tasks/task-R3-01-learning-experience.md",
     "tasks/task-R4-01-progress-tracking.md"
   ],
@@ -78,9 +79,9 @@
     "validation_done": "2026-05-13T23:56:00+07:00"
   },
   "design_context": {
-    "discovery_mode": "full",
-    "discovery_reason": "Greenfield offline app requiring crawler vs local DB research",
-    "validation_recommended": true
+    "discovery_mode": "light",
+    "discovery_reason": "Extension of existing feature with known patterns",
+    "validation_recommended": false
   },
   "validation": {
     "status": "completed",

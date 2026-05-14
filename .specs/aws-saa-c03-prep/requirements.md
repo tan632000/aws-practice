@@ -17,14 +17,17 @@ Dự án được xây dựng mới hoàn toàn (Greenfield) với mục tiêu p
 1.5 The Job Crawler shall read target CSS selectors from an external `selectors.json` configuration file rather than hardcoding them.
 
 ### Requirement 2: Mock Exam Engine
-**Objective:** As a learner, I want to simulate real exam conditions, so that I can practice time management and evaluate my readiness for the SAA-C03 exam.
+**Objective:** As a learner, I want to simulate real exam conditions and choose specific mock exams or random practice, so that I can evaluate my readiness for the SAA-C03 exam effectively.
 
 #### Acceptance Criteria
-2.1 When the user starts a mock exam, the Exam Engine shall randomly select exactly 65 questions from the local database.
-2.2 When the mock exam begins, the Exam Engine shall start a countdown timer initialized to 130 minutes (standard SAA-C03 exam time).
-2.3 While the mock exam is in progress, the Exam Engine shall allow the user to select one or multiple options depending on the specific question's requirements.
-2.4 While the mock exam is in progress, the Exam Engine shall allow the user to mark a question for later review.
-2.5 When the user clicks "Submit Exam" or the timer reaches 00:00, the Exam Engine shall immediately stop the exam, calculate the final score, and display the result summary.
+2.1 When the user views the Dashboard, the UI shall display the 6 available Mock Exams (Mock 1 to 6) as individual selectable options.
+2.2 When the user views the Dashboard, the UI shall also display an option for a "Random Practice Exam".
+2.3 When the user starts a specific Mock Exam, the Exam Engine shall load the exact 65 questions associated with that specific mock exam dataset.
+2.4 When the user starts a "Random Practice Exam", the Exam Engine shall randomly select exactly 65 questions from the local database.
+2.5 When a mock or practice exam begins, the Exam Engine shall start a countdown timer initialized to 130 minutes (standard SAA-C03 exam time).
+2.6 While the exam is in progress, the Exam Engine shall allow the user to select one or multiple options depending on the specific question's requirements.
+2.7 While the exam is in progress, the Exam Engine shall allow the user to mark a question for later review.
+2.8 When the user clicks "Submit Exam" or the timer reaches 00:00, the Exam Engine shall immediately stop the exam, calculate the final score, and display the result summary.
 
 ### Requirement 3: Learning Experience & Immediate Feedback
 **Objective:** As a learner, I want to see detailed explanations and tricks immediately after answering, so that I understand why an answer is correct or wrong and learn efficiently.
