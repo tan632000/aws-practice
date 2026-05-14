@@ -21,6 +21,9 @@ export function QuestionCard({ question, selectedOptionIds, onOptionChange, isPr
     setIsEvaluated(true);
   };
 
+  const correctCount = question.options.filter(o => o.isCorrect).length;
+  const isMultipleChoice = correctCount > 1;
+
   return (
     <div className="glass-card p-8 rounded-3xl relative">
       <div className="flex items-start gap-4 mb-8">
@@ -29,6 +32,11 @@ export function QuestionCard({ question, selectedOptionIds, onOptionChange, isPr
         </div>
         <h3 className="text-xl md:text-2xl font-semibold text-slate-800 leading-relaxed pt-1">
           {question.text}
+          {isMultipleChoice && (
+            <span className="block mt-2 text-base font-medium text-orange-600">
+              (Choose {correctCount} answers)
+            </span>
+          )}
         </h3>
       </div>
       
@@ -39,19 +47,19 @@ export function QuestionCard({ question, selectedOptionIds, onOptionChange, isPr
           let bgColor = 'bg-white hover:bg-slate-50';
           let borderColor = 'border-slate-200';
           let textColor = 'text-slate-700';
-          let radioClass = 'custom-radio';
+          let inputClass = isMultipleChoice ? 'custom-checkbox' : 'custom-radio';
 
           if (isEvaluated) {
              if (opt.isCorrect) {
                bgColor = 'bg-emerald-50';
                borderColor = 'border-emerald-400 border-2';
                textColor = 'text-emerald-900 font-medium';
-               radioClass = 'custom-radio border-emerald-500 text-emerald-500';
+               inputClass = `${isMultipleChoice ? 'custom-checkbox' : 'custom-radio'} border-emerald-500 text-emerald-500`;
              } else if (isSelected && !opt.isCorrect) {
                bgColor = 'bg-rose-50';
                borderColor = 'border-rose-400 border-2';
                textColor = 'text-rose-900 font-medium';
-               radioClass = 'custom-radio border-rose-500 text-rose-500';
+               inputClass = `${isMultipleChoice ? 'custom-checkbox' : 'custom-radio'} border-rose-500 text-rose-500`;
              }
           } else if (isSelected) {
             bgColor = 'bg-orange-50';
@@ -67,12 +75,12 @@ export function QuestionCard({ question, selectedOptionIds, onOptionChange, isPr
             >
               <div className="pt-0.5">
                 <input 
-                  type="radio" 
+                  type={isMultipleChoice ? "checkbox" : "radio"}
                   name={`question-${question.id}`}
                   checked={isSelected}
                   onChange={() => onOptionChange(opt.id)}
                   disabled={isEvaluated}
-                  className={radioClass}
+                  className={inputClass}
                 />
               </div>
               <span className="text-lg leading-relaxed flex-1">{opt.text}</span>

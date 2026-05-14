@@ -1,12 +1,16 @@
 /**
  * @vitest-environment happy-dom
  */
-import { describe, it, expect, vi } from 'vitest';
-import { render, screen, fireEvent } from '@testing-library/react';
+import { describe, it, expect, vi, afterEach } from 'vitest';
+import { render, screen, fireEvent, cleanup } from '@testing-library/react';
 import { QuestionCard } from './QuestionCard';
 import type { QuestionSchema } from '../../../lib/types';
 
 describe('QuestionCard', () => {
+  afterEach(() => {
+    cleanup();
+  });
+
   const mockQuestion: QuestionSchema = {
     id: 'q1',
     text: 'Test question?',
@@ -49,5 +53,46 @@ describe('QuestionCard', () => {
     const trickBtn = screen.getByText('Show Pro Tip');
     fireEvent.click(trickBtn);
     expect(screen.getByText('This is a trick')).toBeDefined();
+  });
+
+  it('renders checkboxes for multiple choice questions', () => {
+    const multiMockQuestion: QuestionSchema = {
+      id: 'q2',
+      text: 'Multiple choice?',
+      options: [
+        { id: 'opt1', text: 'Correct 1', isCorrect: true },
+        { id: 'opt2', text: 'Correct 2', isCorrect: true },
+        { id: 'opt3', text: 'Wrong', isCorrect: false }
+      ]
+    };
+
+    render(
+      <QuestionCard 
+        question={multiMockQuestion} 
+        selectedOptionIds={[]} 
+        onOptionChange={vi.fn()}
+      />
+    );
+
+    // Should display instruction
+    expect(screen.getByText('(Choose 2 answers)')).toBeDefined();
+
+    // Inputs should be checkboxes
+    const inputs = screen.getAllByRole('checkbox');
+    expect(inputs).toHaveLength(3);
+  });
+
+  it('renders radio buttons for single choice questions', () => {
+    render(
+      <QuestionCard 
+        question={mockQuestion} 
+        selectedOptionIds={[]} 
+        onOptionChange={vi.fn()}
+      />
+    );
+
+    // Inputs should be radios
+    const inputs = screen.getAllByRole('radio');
+    expect(inputs).toHaveLength(2);
   });
 });

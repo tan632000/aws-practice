@@ -96,8 +96,18 @@ export function ExamView() {
   const isMarked = session.markedForReview.includes(currentQuestion.id);
 
   const handleOptionChange = async (optionId: string) => {
-    // Assuming single choice for now to keep UI simple
-    const newAnswers = [optionId];
+    const isMultipleChoice = currentQuestion.options.filter(o => o.isCorrect).length > 1;
+    
+    let newAnswers: string[];
+    if (isMultipleChoice) {
+      if (currentAnswers.includes(optionId)) {
+        newAnswers = currentAnswers.filter(id => id !== optionId);
+      } else {
+        newAnswers = [...currentAnswers, optionId];
+      }
+    } else {
+      newAnswers = [optionId];
+    }
     
     // Update local state
     setSession(prev => {
