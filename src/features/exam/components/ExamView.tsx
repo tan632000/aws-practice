@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { useTimer, formatTime } from '../hooks/useTimer';
 import { getActiveSession, updateSessionAnswer, updateSessionReviewMark, submitExam, saveRemainingTime, EXAM_DURATION_SECONDS } from '../ExamEngine';
@@ -41,11 +42,18 @@ export function ExamView() {
 
   if (result) {
     return (
-      <div className="p-8">
-        <h1 className="text-2xl font-bold">Exam Results</h1>
-        <p className="mt-4 text-xl">Score: {result.score.toFixed(2)}%</p>
-        <p>Correct: {result.totalCorrect} / {result.totalQuestions}</p>
-        <p className="mt-2 font-semibold">{result.passed ? 'PASSED 🎉' : 'FAILED 😢'}</p>
+      <div className="max-w-3xl mx-auto p-8 mt-10 bg-white border rounded shadow-sm text-center">
+        <h1 className="text-3xl font-bold mb-6 text-gray-800">Exam Results</h1>
+        <div className="text-6xl font-black mb-4" style={{ color: result.passed ? '#16a34a' : '#dc2626' }}>
+          {result.score.toFixed(1)}%
+        </div>
+        <p className="text-xl text-gray-600 mb-6">Correct: {result.totalCorrect} / {result.totalQuestions}</p>
+        <p className="text-2xl font-semibold mb-8 uppercase tracking-widest" style={{ color: result.passed ? '#16a34a' : '#dc2626' }}>
+          {result.passed ? 'PASSED 🎉' : 'FAILED 😢'}
+        </p>
+        <Link to="/" className="inline-block px-8 py-3 bg-blue-600 text-white rounded font-bold hover:bg-blue-700 transition">
+          Back to Dashboard
+        </Link>
       </div>
     );
   }
