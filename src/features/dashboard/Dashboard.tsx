@@ -5,7 +5,10 @@ import { exportData, importData, calculateAverageScore } from '../../lib/dataSyn
 import { formatTime } from '../exam/hooks/useTimer';
 import type { ExamHistory } from '../../lib/types';
 
+import { useNavigate } from 'react-router-dom';
+
 export function Dashboard() {
+  const navigate = useNavigate();
   const [history, setHistory] = useState<ExamHistory[]>([]);
   const [hasActiveSession, setHasActiveSession] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -50,6 +53,17 @@ export function Dashboard() {
     }
   };
 
+  const handleStartNewExam = async (e: React.MouseEvent, mockId: number | 'random') => {
+    e.preventDefault();
+    if (hasActiveSession) {
+      if (!window.confirm("Bạn đang có một bài thi chưa hoàn thành. Bắt đầu bài thi mới sẽ xóa tiến trình hiện tại. Bạn có chắc chắn?")) {
+        return;
+      }
+      await db.activeSession.clear();
+    }
+    navigate(`/exam?mockId=${mockId}`);
+  };
+
   const avgScore = calculateAverageScore(history);
   const totalQuestions = history.reduce((sum, h) => sum + h.totalQuestions, 0);
 
@@ -69,10 +83,24 @@ export function Dashboard() {
           <button onClick={handleExport} className="px-5 py-2.5 bg-white/80 backdrop-blur-sm text-slate-700 font-medium rounded-xl hover:bg-white shadow-sm transition-all border border-slate-200">Export</button>
           <button onClick={() => fileInputRef.current?.click()} className="px-5 py-2.5 bg-white/80 backdrop-blur-sm text-slate-700 font-medium rounded-xl hover:bg-white shadow-sm transition-all border border-slate-200">Import</button>
           <input type="file" accept=".json" className="hidden" ref={fileInputRef} onChange={handleImport} />
-          <Link to="/exam" className="px-6 py-2.5 bg-gradient-to-r from-[#232F3E] to-[#374151] text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all">
-            {hasActiveSession ? 'Resume Exam' : 'Start Exam'}
+          <Link to="/exam" className={`px-6 py-2.5 bg-gradient-to-r from-[#232F3E] to-[#374151] text-white rounded-xl font-bold hover:shadow-lg hover:scale-105 transition-all ${!hasActiveSession && 'opacity-50 cursor-not-allowed pointer-events-none'}`}>
+            Resume Exam
           </Link>
         </div>
+      </div>
+
+      <h2 className="text-2xl font-bold mb-6 text-slate-800 px-2">Available Exams</h2>
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4 mb-12">
+        {[1, 2, 3, 4, 5, 6].map(id => (
+          <button key={id} onClick={(e) => handleStartNewExam(e, id)} className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center hover:bg-orange-50 transition-colors border border-transparent hover:border-orange-200 cursor-pointer text-left w-full">
+            <div className="text-xl font-bold text-slate-800 mb-2">Mock Exam {id}</div>
+            <div className="text-sm text-slate-500">65 Questions</div>
+          </button>
+        ))}
+        <button onClick={(e) => handleStartNewExam(e, 'random')} className="glass-card p-6 rounded-2xl flex flex-col items-center justify-center hover:bg-blue-50 transition-colors border border-transparent hover:border-blue-200 cursor-pointer text-left w-full">
+          <div className="text-xl font-bold text-slate-800 mb-2">Random Practice</div>
+          <div className="text-sm text-slate-500">65 Questions</div>
+        </button>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
@@ -110,7 +138,14 @@ export function Dashboard() {
             <tbody>
               {history.map((h, i) => (
                 <tr key={i} className="border-b border-slate-200/50 last:border-0 hover:bg-white/50 transition-colors">
-                  <td className="p-5 text-slate-800 font-medium">{new Date(h.date).toLocaleString()}</td>
+                  <td className="p-5 text-slate-800 font-medium">
+                    {new Date(h.date).toLocaleString()}
+                    {h.mockId && (
+                      <span className="ml-2 inline-block px-2 py-0.5 bg-slate-100 text-slate-500 text-xs rounded">
+                        {h.mockId === 'random' ? 'Random' : `Mock ${h.mockId}`}
+                      </span>
+                    )}
+                  </td>
                   <td className="p-5 font-bold text-slate-900">{h.score.toFixed(1)}%</td>
                   <td className="p-5">
                     <span className={`inline-flex px-3 py-1 text-xs font-bold rounded-full ${h.score >= 72 ? 'bg-emerald-100 text-emerald-700 border border-emerald-200' : 'bg-rose-100 text-rose-700 border border-rose-200'}`}>

@@ -34,7 +34,60 @@ export async function getRandomQuestions(limit: number): Promise<QuestionSchema[
   return questions;
 }
 
-export async function startExam(): Promise<ExamSession> {
+interface RawMockQuestion {
+  id: string;
+  question: string;
+  options: string[];
+  correct: number[];
+  explanation: string;
+  domain?: string;
+  reference?: string;
+  questionNumber?: number;
+  type?: string;
+}
+
+function mapRawQuestions(rawQuestions: RawMockQuestion[]): QuestionSchema[] {
+  return rawQuestions.map(q => ({
+    id: q.id,
+    text: q.question,
+    options: q.options.map((optText: string, index: number) => ({
+      id: String(index),
+      text: optText,
+      isCorrect: q.correct.includes(index)
+    })),
+    explanation: q.explanation,
+    domain: q.domain
+  }));
+}
+
+export async function startMockExam(mockId: number): Promise<ExamSession> {
+  const res = await fetch(`/data/exam${mockId}.json`);
+  if (!res.ok) throw new Error(`Failed to fetch exam${mockId}.json`);
+  const data = await res.json();
+  
+  if (!data.success || !data.questions || data.questions.length === 0) {
+    throw new Error("Invalid mock exam data");
+  }
+
+  const questions = mapRawQuestions(data.questions);
+
+  const session: ExamSession = {
+    sessionId: crypto.randomUUID(),
+    mockId,
+    startTime: Date.now(),
+    remainingSeconds: EXAM_DURATION_SECONDS,
+    questions,
+    answers: {},
+    markedForReview: [],
+    isCompleted: false
+  };
+
+  await db.activeSession.clear();
+  await db.activeSession.add(session);
+  return session;
+}
+
+export async function startRandomPractice(): Promise<ExamSession> {
   const questions = await getRandomQuestions(EXAM_QUESTION_COUNT);
   
   if (questions.length === 0) {
@@ -43,6 +96,7 @@ export async function startExam(): Promise<ExamSession> {
 
   const session: ExamSession = {
     sessionId: crypto.randomUUID(),
+    mockId: 'random',
     startTime: Date.now(),
     remainingSeconds: EXAM_DURATION_SECONDS,
     questions,
@@ -121,6 +175,7 @@ export async function submitExam(sessionId: string): Promise<ExamResult> {
   await db.history.add({
     id: crypto.randomUUID(),
     date: Date.now(),
+    mockId: session.mockId,
     score: result.score,
     totalQuestions: result.totalQuestions,
     timeSpentSeconds: EXAM_DURATION_SECONDS - session.remainingSeconds 

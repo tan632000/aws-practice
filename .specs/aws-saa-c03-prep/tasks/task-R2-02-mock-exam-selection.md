@@ -1,7 +1,7 @@
 # Task R2-02: Mock Exam Selection & JSON Mapping
 
 **Requirement:** R2 — Mock Exam Engine
-**Status:** pending
+**Status:** done
 **Priority:** P1
 **Estimated Effort:** 2 hours
 **Dependencies:** None

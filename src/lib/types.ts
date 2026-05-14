@@ -15,6 +15,7 @@ export interface QuestionSchema {
 
 export interface ExamSession {
   sessionId: string;
+  mockId?: number | 'random';
   startTime: number;
   remainingSeconds: number;
   questions: QuestionSchema[];
@@ -34,6 +35,7 @@ export interface ExamResult {
 export interface ExamHistory {
   id: string; // PK
   date: number; // timestamp
+  mockId?: number | 'random';
   score: number;
   totalQuestions: number;
   timeSpentSeconds: number;

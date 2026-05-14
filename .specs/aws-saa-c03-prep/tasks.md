@@ -10,7 +10,7 @@
 | R0-01 | Project Setup & Scaffolding | P0 | done | 2h |
 | R1-01 | Crawler Job Implementation | P2 | done | 3h |
 | R2-01 | Mock Exam Engine & Reliability | P1 | done | 4h |
-| R2-02 | Mock Exam Selection & JSON Mapping | P1 | pending | 2h |
+| R2-02 | Mock Exam Selection & JSON Mapping | P1 | done | 2h |
 | R3-01 | Learning Experience & Feedback UI | P1 | done | 3h |
 | R4-01 | Progress Tracking & Export/Import | P2 | done | 3h |
 
