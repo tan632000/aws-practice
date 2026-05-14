@@ -1,0 +1,92 @@
+{
+  "feature_name": "aws-saa-c03-prep",
+  "created_at": "2026-05-13T23:38:26+07:00",
+  "updated_at": "2026-05-13T23:59:00+07:00",
+  "language": "vi",
+  "status": "in_progress",
+  "phase": "tasks-generated",
+  "current_phase": "tasks",
+  "priority": "P2",
+  "effort": null,
+  "tags": [
+    "aws",
+    "saa-c03",
+    "exam-prep"
+  ],
+  "approvals": {
+    "requirements": {
+      "generated": true,
+      "approved": true
+    },
+    "design": {
+      "generated": true,
+      "approved": true
+    },
+    "tasks": {
+      "generated": true,
+      "approved": false
+    }
+  },
+  "scope_lock": {
+    "source": "Hệ thống web học và ôn luyện chứng chỉ AWS CERTIFIED SOLUTIONS ARCHITECT – ASSOCIATE (SAA-C03).\n1. Đây là hệ thống cho cá nhân sử dụng với mục đích học tập và ôn luyện chứng chỉ. Không cần tính năng đăng ký, đăng nhập, theo dõi tiến độ của bản thân thôi, không cần phân quyền\n2. Phần data management tôi nghĩ là nên crawl data về từ trang chủ (cần implement job crawl data)\n3. Thi mô phỏng 65 câu có tính giờ, hiển thị giải thích chi tiết cho từng câu đúng/sai ngay lập tức. Nếu được có thể implement phần trick để trả lời câu hỏi.",
+    "in_scope": [
+      "Theo dõi tiến độ học tập cho 1 cá nhân (Local Storage / DB cục bộ)",
+      "Job crawl dữ liệu câu hỏi từ nguồn bên ngoài",
+      "Giao diện thi mô phỏng 65 câu hỏi có tính giờ",
+      "Hiển thị giải thích chi tiết đáp án đúng/sai ngay sau mỗi câu hoặc sau bài thi",
+      "Tính năng mẹo (trick/tips) để trả lời câu hỏi"
+    ],
+    "out_of_scope": [
+      "Hệ thống xác thực (Đăng ký, Đăng nhập, Quên mật khẩu)",
+      "Phân quyền người dùng (Admin, User, Manager)",
+      "Thanh toán khóa học"
+    ],
+    "expansion_policy": "requires-user-approval"
+  },
+  "dependencies": {
+    "blockedBy": [],
+    "blocks": []
+  },
+  "task_files": [
+    "tasks/task-R0-01-project-setup.md",
+    "tasks/task-R1-01-crawler-job.md",
+    "tasks/task-R2-01-mock-exam-engine.md",
+    "tasks/task-R3-01-learning-experience.md",
+    "tasks/task-R4-01-progress-tracking.md"
+  ],
+  "task_registry": {},
+  "blocker": null,
+  "progress": {
+    "init": "done",
+    "requirements": "done",
+    "research": "done",
+    "design": "done",
+    "tasks": "pending",
+    "code": "pending",
+    "test": "pending",
+    "review": "pending"
+  },
+  "timestamps": {
+    "init": "2026-05-13T23:38:26+07:00",
+    "requirements_done": "2026-05-13T23:49:00+07:00",
+    "research_done": "2026-05-13T23:49:00+07:00",
+    "design_done": "2026-05-13T23:59:00+07:00",
+    "tasks_done": null,
+    "code_done": null,
+    "test_done": null,
+    "review_done": null,
+    "validation_done": "2026-05-13T23:56:00+07:00"
+  },
+  "design_context": {
+    "discovery_mode": "full",
+    "discovery_reason": "Greenfield offline app requiring crawler vs local DB research",
+    "validation_recommended": true
+  },
+  "validation": {
+    "status": "completed",
+    "session_count": 1,
+    "questions_asked": 3,
+    "last_validated_at": "2026-05-13T23:56:00+07:00"
+  },
+  "ready_for_implementation": false
+}

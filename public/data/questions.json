@@ -1,0 +1,19 @@
+[
+  {
+    "text": "What is Amazon S3?",
+    "options": [
+      {
+        "id": "opt-0",
+        "text": "Object Storage",
+        "isCorrect": true
+      },
+      {
+        "id": "opt-1",
+        "text": "Block Storage",
+        "isCorrect": false
+      }
+    ],
+    "explanation": "S3 is object storage.",
+    "id": "d876aee7a849e7bacd7abd8d9ab0887d997aa550190a54c0da16bf74e361d637"
+  }
+]

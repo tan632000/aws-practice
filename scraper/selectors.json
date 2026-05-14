@@ -1,0 +1,11 @@
+{
+  "targetUrl": "./mock.html",
+  "questionContainer": ".question-card",
+  "questionText": ".question-text",
+  "options": ".option",
+  "optionText": ".option-text",
+  "isCorrectClass": "correct",
+  "explanation": ".explanation-text",
+  "trick": ".trick-text",
+  "domain": ".domain-text"
+}
